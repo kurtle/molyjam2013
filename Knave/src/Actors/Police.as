@@ -1,4 +1,7 @@
 package Actors {
+	import org.flixel.FlxG;
+	import org.flixel.FlxObject;
+	import flash.geom.Point;
 	import flash.utils.getTimer;
 	import Actors.Agent;
 
@@ -11,51 +14,76 @@ package Actors {
 		public static const POL_BEHAVIOR_MARKED:String = "MARKED";
 		public static const POL_BEHAVIOR_ALERT:String = "ALERT";
 		
+		private var patrolDirection:uint;
+		
 		public function Police(X : Number = 0, Y : Number = 0, SimpleGraphic : Class = null) {
 			super(X, Y, SimpleGraphic);
 			
 			changeState(POL_BEHAVIOR_PATROL);
+			patrolDirection = FlxObject.UP;
 		}
 		
 		override public function update():void {
 			if (behaviorState == POL_BEHAVIOR_PATROL)
 			{
-				if (seesPlayer())
-				{
-					changeState(POL_BEHAVIOR_MARKED);
-				}
+				updatePatrolState();
 			}
 			
 			if (behaviorState == POL_BEHAVIOR_MARKED)
 			{
-				if (seesPlayer())
-				{
-					//re-up the marked behavior
-					changeState(POL_BEHAVIOR_MARKED);
-				} 
-				
-				if (getTimer() > lastBehaviorChangeTime + 3000)
-				{
-					changeState(POL_BEHAVIOR_ALERT);
-				}
+				updateMarkedState();
 			}
 			
 			if (behaviorState == POL_BEHAVIOR_ALERT)
 			{
-				
-				if (seesPlayer())
+				updateAlertState();
+			}
+		}
+		
+		private function updatePatrolState():void
+		{
+			if (seesPlayer())
 				{
-					//return to the marked behavior
 					changeState(POL_BEHAVIOR_MARKED);
-				} 
-				
-				if (getTimer() > lastBehaviorChangeTime + 3000)
-				{
-					changeState(POL_BEHAVIOR_PATROL);
+				} else {
+					if (justTouched(patrolDirection))
+					{
+						patrolDirection = reverseDirection(patrolDirection);
+					}
+					var deltaDir:Point = directionVector(patrolDirection);
+					this.moveDelta(this.speed * deltaDir.x, this.speed * deltaDir.y);
 				}
+		}
+		
+		private function updateMarkedState():void
+		{
+			if (seesPlayer())
+			{
+				//re-up the marked behavior
+				changeState(POL_BEHAVIOR_MARKED);
+				var playerDir:Vec = new Vec(Registry.p1.x - x, Registry.p1.y - y);
+				this.moveDelta(this.speed*playerDir.x/playerDir.magnitude(),this.speed*playerDir.y/playerDir.magnitude());
+			} else if (getTimer() > lastBehaviorChangeTime + 3000)
+			{
+				changeState(POL_BEHAVIOR_ALERT);
+			} else {
+	
 			}
 		}
 
+		private function updateAlertState():void
+		{			
+			if (seesPlayer())
+			{
+				//return to the marked behavior
+				changeState(POL_BEHAVIOR_MARKED);
+			} else if (getTimer() > lastBehaviorChangeTime + 3000)
+			{
+				changeState(POL_BEHAVIOR_PATROL);
+			} else {
+				this.moveDelta(this.speed * (2*FlxG.random() - 1), this.speed * (2*FlxG.random()-1));
+			}
+		}
 		
 	}
 }
