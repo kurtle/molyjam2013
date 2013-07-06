@@ -1,6 +1,7 @@
 package {
 	import Actors.Police;
 	import Actors.Agent;
+	import Actors.King;
 	import Actors.Player;
 	
 	import org.flixel.*;
@@ -34,6 +35,8 @@ package {
 			Registry.police1 = new Police(360,260);
 			add(Registry.police1);
 		
+			Registry.king = new King(500, 350);
+			add(Registry.king);
 		}
 		
 		override public function update():void
