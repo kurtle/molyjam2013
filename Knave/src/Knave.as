@@ -8,6 +8,8 @@ package
 		public function Knave()
 		{
 			super(640, 480, PlayState, 1);
+			//hit tilde in game to see logging
+			FlxG.debug = true;
 		}
 	}
 }

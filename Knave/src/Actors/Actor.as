@@ -23,7 +23,7 @@ package Actors
 		{
 			this.x += x;
 			this.y += y;
-			
 		}
+		
 	}
 }
