@@ -25,11 +25,33 @@ package Actors {
 					changeState(POL_BEHAVIOR_MARKED);
 				}
 			}
+			
 			if (behaviorState == POL_BEHAVIOR_MARKED)
 			{
+				if (seesPlayer())
+				{
+					//re-up the marked behavior
+					changeState(POL_BEHAVIOR_MARKED);
+				} 
+				
 				if (getTimer() > lastBehaviorChangeTime + 3000)
 				{
 					changeState(POL_BEHAVIOR_ALERT);
+				}
+			}
+			
+			if (behaviorState == POL_BEHAVIOR_ALERT)
+			{
+				
+				if (seesPlayer())
+				{
+					//return to the marked behavior
+					changeState(POL_BEHAVIOR_MARKED);
+				} 
+				
+				if (getTimer() > lastBehaviorChangeTime + 3000)
+				{
+					changeState(POL_BEHAVIOR_PATROL);
 				}
 			}
 		}
