@@ -26,8 +26,8 @@ package Actors {
 			var collisionPoint:FlxPoint = new FlxPoint(-1000000,-1000000);
 			
 			//Try to see player
-			var myPos:FlxPoint = new FlxPoint(x,y);
-			var playerPos:FlxPoint = new FlxPoint(Registry.p1.x,Registry.p1.y);
+			var myPos:FlxPoint = new FlxPoint(x+width/2,y+height/2);
+			var playerPos:FlxPoint = new FlxPoint(Registry.p1.x+Registry.p1.width/2,Registry.p1.y+Registry.p1.height/2);
 			return Registry.map.ray(myPos,playerPos,collisionPoint,100);
 		}
 		
