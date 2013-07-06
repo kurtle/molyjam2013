@@ -17,7 +17,7 @@ package Actors
 			
 		}
 		
-		public function moveDelta(x:int, y:int):void
+		public function moveDelta(x:Number, y:Number):void
 		{
 			this.x += x;
 			this.y += y;

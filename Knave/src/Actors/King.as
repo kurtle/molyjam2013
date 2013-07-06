@@ -4,6 +4,10 @@ package Actors
 
 	public class King extends Agent
 	{
+		
+		[Embed(source = "../../img/king.png")]public var kingGraphic:Class;
+		
+		
 		private var dest:FlxPoint;
 		private var pointsOfInterest:Array = [new FlxPoint(260, 45),
 											  new FlxPoint(585, 135),
@@ -14,6 +18,7 @@ package Actors
 		public function King(X:Number=0, Y:Number=0, SimpleGraphic:Class=null)
 		{
 			super(X, Y, SimpleGraphic);
+			loadGraphic(kingGraphic, true, true, 20, 20);
 			
 			this.speed = 12;
 		}

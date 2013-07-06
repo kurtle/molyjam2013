@@ -4,7 +4,7 @@ package Actors
 	
 	public class Player extends Actor
 	{
-		[Embed(source = "../../img/knaveTest.png")]public var knaveTest:Class;
+		[Embed(source = "../../img/princess.png")]public var princessGraphics:Class;
 		
 		public var playerIndex:int;
 		
@@ -12,7 +12,7 @@ package Actors
 		{
 			super(X, Y, SimpleGraphic);
 			
-			loadGraphic(knaveTest, true, true, 20, 20);
+			loadGraphic(princessGraphics, true, true, 20, 20);
 			addAnimation("walking", [0, 1, 2], 10, true);
 			addAnimation("idle", [0], 1, true);
 			play("idle");
