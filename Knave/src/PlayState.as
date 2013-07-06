@@ -1,4 +1,5 @@
 package {
+	import Actors.Police;
 	import Actors.Agent;
 	import Actors.King;
 	import Actors.Player;
@@ -31,7 +32,7 @@ package {
 			//Registry.p2.setPlayer(1);
 			//add(Registry.p2);
 			
-			Registry.police1 = new Agent(360,260);
+			Registry.police1 = new Police(360,260);
 			add(Registry.police1);
 		
 			Registry.king = new King(500, 350);
