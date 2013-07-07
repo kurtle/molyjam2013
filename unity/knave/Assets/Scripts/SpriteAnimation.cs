@@ -39,7 +39,8 @@ public class SpriteAnimation : MonoBehaviour
 
 	private float frameWidth;
 
-	public int totalFrames;
+	public float totalFrames;
+	public float framePercentHeight;
 	
 	private void Awake()
 	{
@@ -50,7 +51,7 @@ public class SpriteAnimation : MonoBehaviour
 			this.material = this.renderer.material;
 			this.frameWidth = 1.0f / this.totalFrames;
 
-			this.material.mainTextureScale = new Vector2(this.frameWidth, 1);
+			this.material.mainTextureScale = new Vector2(this.frameWidth, this.framePercentHeight);
 		}
 	}
 

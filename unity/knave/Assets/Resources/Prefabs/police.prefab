@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae4770fdc480d240a34ea30b1ca7e3c, type: 3}
   m_Name: 
   totalFrames: 10
+  framePercentHeight: 1
 --- !u!195 &19500000
 NavMeshAgent:
   m_ObjectHideFlags: 1
