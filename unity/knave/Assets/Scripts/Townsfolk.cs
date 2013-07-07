@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Townsfolk : Agent
 {
@@ -155,14 +155,19 @@ public class Townsfolk : Agent
 			return;
 		}
 
+		List<Police> visibleList = new List<Police>();
 		foreach (Police p in Registry.Instance.policeList)
 		{
 			if (this.seesEntity(p))
 			{
-				startSeekPolice(p);
-
-				return;
+				visibleList.Add(p);
 			}
+		}
+		if (visibleList.Count > 0)
+		{
+			int index = Random.Range(0, visibleList.Count);
+			startSeekPolice(visibleList[index]);
+			return;
 		}
 		
 		if (Game.gameTime() > this.aghastTime)
