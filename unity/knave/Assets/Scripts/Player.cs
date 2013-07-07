@@ -43,6 +43,18 @@ public class Player : Actor
 		{
 			this.spriteAnimation.play(ANIM_WALK);
 		}
+		
+		//temp
+		if (Input.GetKey(KeyCode.E))
+		{
+			foreach (Police p in Registry.Instance.policeList)
+			{
+				if(p.seesEntity(this))
+				{
+					p.informPlayerPosition(this.transform.position);
+				}
+			}
+		}
 
 		this.moveDelta(inputDelta.normalized);
 

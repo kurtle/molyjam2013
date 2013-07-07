@@ -4,11 +4,11 @@ using System.Collections;
 public class Police : Agent
 {
 	public const string POL_BEHAVIOR_PATROL = "PATROL";
-	public const string POL_BEHAVIOR_MARKED = "MARKED";
+	//public const string POL_BEHAVIOR_CHASING = "CHASING";
 	public const string POL_BEHAVIOR_ALERT = "ALERT";
-
 	public const string POL_BEHAVIOR_DESTINATION = "DESTINATION";
-
+	public const string POL_BEHAVIOR_EMBARRASSED = "EMBARASSED";
+	
 	public Popup emotePopup;
 
 	private const string ANIM_IDLE = "idle";
@@ -23,7 +23,12 @@ public class Police : Agent
 	private Game.Direction patrolDirection;
 
 	private bool justCollided;
+	private Collider justCollidedWith;
 	private float baseSpeed;
+	
+	private bool isPlayerMarked;
+	
+	private int updateCount;
 
 	protected void Start()
 	{
@@ -36,16 +41,22 @@ public class Police : Agent
 		
 		this.baseSpeed = speed;
 		this.setPathfindingEnabled(false);
+		this.isPlayerMarked = false;
+		this.updateCount = 0;
 		//this.destination = this.transform.position;
 	}
 
-	protected void OnCollisionEnter()
+	protected void OnCollisionEnter(Collision collision)
 	{
 		this.justCollided = true;
+		this.justCollidedWith = collision.collider;
 	}
 
 	protected override void FixedUpdate()
 	{
+
+		base.FixedUpdate();
+		
 		if (seesEntity(Registry.Instance.player))
 		{
 			playerLastSeen = Registry.Instance.player.transform.position;
@@ -55,10 +66,10 @@ public class Police : Agent
 		{
 			updatePatrolState();
 		}
-		else if (this.behaviorState == POL_BEHAVIOR_MARKED)
-		{
-			updateMarkedState();
-		}
+		//else if (this.behaviorState == POL_BEHAVIOR_CHASING)
+		//{
+		//	updateChasingState();
+		//}
 		else if (this.behaviorState == POL_BEHAVIOR_ALERT)
 		{
 			updateAlertState();
@@ -67,40 +78,53 @@ public class Police : Agent
 		{
 			updateDestinationState();
 		}
+		else if (this.behaviorState == POL_BEHAVIOR_EMBARRASSED)
+		{
+			updateEmbarrassedState();
+		}
 
 
 		this.justCollided = false;
+		this.updateCount++;
 
-		base.FixedUpdate();
+
 	}
 
 	private void updatePatrolState()
 	{
 		emote(EMOTE_NONE);
 
-		if (seesEntity(Registry.Instance.player))
+		if (seesEntity(Registry.Instance.player) && this.isPlayerMarked)
 		{
-			changeState(POL_BEHAVIOR_MARKED);
-		}
-		else
+			informPlayerPosition(playerLastSeen);
+			//changeState(POL_BEHAVIOR_CHASING);
+		} else
 		{
+			
+		
 			if (this.justCollided)
 			{
 				this.patrolDirection = Game.reverseDirection(this.patrolDirection);
 			}
 			this.moveDelta(Game.directionVector(this.patrolDirection));
-
+	
 			this.spriteAnimation.play(ANIM_WALK, true);
 		}
 	}
-
-	private void updateMarkedState()
+	
+	/*
+	private void updateChasingState()
 	{
 		emote(EMOTE_MARKED);
-
-		if (seesEntity(Registry.Instance.player))
+		
+		if (this.justCollided && this.justCollidedWith == Registry.Instance.player.collider)
 		{
-			changeState(POL_BEHAVIOR_MARKED);
+			//caught player
+			changeState(POL_BEHAVIOR_PATROL);
+			this.isPlayerMarked = false;
+		} else if (seesEntity(Registry.Instance.player))
+		{
+			//changeState(POL_BEHAVIOR_CHASING);
 			
 			this.speed = baseSpeed * 1.3f;
 
@@ -115,6 +139,7 @@ public class Police : Agent
 			this.informPlayerPosition(playerLastSeen);
 		}
 	}
+	*/
 
 	private void updateAlertState()
 	{
@@ -122,7 +147,8 @@ public class Police : Agent
 
 		if (seesEntity(Registry.Instance.player))
 		{
-			changeState(POL_BEHAVIOR_MARKED);
+			//changeState(POL_BEHAVIOR_CHASING);
+			informPlayerPosition(this.playerLastSeen);
 		}
 		else if (Game.gameTime() > this.lastBehaviorChangeTime + 3000)
 		{
@@ -139,11 +165,22 @@ public class Police : Agent
 	
 	private void updateDestinationState()
 	{
-		emote(EMOTE_NONE);
-		if (seesEntity(Registry.Instance.player))
+		this.speed = baseSpeed * 1.3f;
+		emote(EMOTE_MARKED);
+		if (this.justCollided && this.justCollidedWith == Registry.Instance.player.collider)
 		{
-			changeState(POL_BEHAVIOR_MARKED);
+			//caught player
+			changeState(POL_BEHAVIOR_EMBARRASSED);
 			this.setPathfindingEnabled(false);
+			this.isPlayerMarked = false;
+		} else if (seesEntity(Registry.Instance.player))
+		{
+			//changeState(POL_BEHAVIOR_CHASING);
+			//this.setPathfindingEnabled(false);
+			if (updateCount % 15 == 0)
+			{
+				this.setDestination(playerLastSeen);
+			}
 		} else if (this.isDestinationReached())
 		{
 			changeState(POL_BEHAVIOR_PATROL);
@@ -151,10 +188,18 @@ public class Police : Agent
 		}
 	}
 	
+	private void updateEmbarrassedState()
+	{
+		emote(EMOTE_ALERT);
+		if (Game.gameTime() > this.lastBehaviorChangeTime + 3000)
+		{
+			changeState(POL_BEHAVIOR_PATROL);
+		}
+	}
 	public void informPlayerPosition(Vector3 lastPos)
 	{
+		this.isPlayerMarked = true;
 		changeState(POL_BEHAVIOR_DESTINATION);
-		//destination = lastPos;
 		this.setPathfindingEnabled(true);
 		this.setDestination(lastPos);
 	}
