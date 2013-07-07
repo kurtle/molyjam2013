@@ -66,7 +66,7 @@ public class Police : Agent
 			Vector3 playerPos = Registry.Instance.player.transform.position;
 			Vector3 myPos = this.transform.position;
 
-			this.moveDelta(playerPos - myPos);
+			this.moveDelta((playerPos - myPos).normalized);
 		}
 		else
 		{
