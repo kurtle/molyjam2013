@@ -33,7 +33,7 @@ public class Police : Agent
 	}
 
 	protected override void FixedUpdate()
-	{		
+	{
 		if (this.behaviorState == POL_BEHAVIOR_PATROL)
 		{
 			updatePatrolState();
@@ -69,7 +69,6 @@ public class Police : Agent
 			{
 				this.patrolDirection = Game.reverseDirection(this.patrolDirection);
 			}
-
 			this.moveDelta(Game.directionVector(this.patrolDirection));
 
 			this.spriteAnimation.play(ANIM_WALK, true);
@@ -115,12 +114,10 @@ public class Police : Agent
 	
 	private void updateDestinationState()
 	{
-		base.FixedUpdate();
 		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
 			this.setPathfindingEnabled(false);
-			this.navMeshAgent.ResetPath();
 		} else if (this.isDestinationReached())
 		{
 			changeState(POL_BEHAVIOR_PATROL);
@@ -132,8 +129,8 @@ public class Police : Agent
 	{
 		changeState(POL_BEHAVIOR_DESTINATION);
 		//destination = lastPos;
-		this.setDestination(lastPos);
 		this.setPathfindingEnabled(true);
+		this.setDestination(lastPos);
 	}
 	
 }

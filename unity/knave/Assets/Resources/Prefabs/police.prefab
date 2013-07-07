@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   debugEnabled: 0
   spriteAnimation: {fileID: 11400002}
+  flipFacing: 0
   speed: .0500000007
   navMeshAgent: {fileID: 19500000}
 --- !u!114 &11400002
@@ -145,7 +146,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50

@@ -90,8 +90,11 @@ public class Agent : Actor
 	{
 		if (this.pathfindingEnabled != value)
 		{
-			this.currentPath = null;
-			this.navMeshAgent.ResetPath();
+			if (!value)
+			{
+				this.currentPath = null;
+				this.navMeshAgent.ResetPath();
+			}
 
 			this.pathfindingEnabled = value;
 		}

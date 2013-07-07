@@ -63,7 +63,7 @@ LightmapSettings:
 NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    agentRadius: .5
+    agentRadius: .349999994
     agentHeight: 1
     agentSlope: 0
     agentClimb: 0
@@ -129,7 +129,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 286120997}
   m_GameObject: {fileID: 10783672}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -293,7 +293,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 963394393}
   m_GameObject: {fileID: 23779938}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -558,6 +558,10 @@ Prefab:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19500000, guid: 27709fbc829b14be4806efe6402da6a9, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27709fbc829b14be4806efe6402da6a9, type: 2}
   m_RootGameObject: {fileID: 10783672}
@@ -793,7 +797,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 680056178}
   m_GameObject: {fileID: 364718164}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -1417,7 +1421,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 1996076298}
   m_GameObject: {fileID: 824603656}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -1820,8 +1824,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 364718165}
   - {fileID: 1851018680}
+  - {fileID: 364718165}
   - {fileID: 1569373878}
   - {fileID: 1481836025}
   - {fileID: 1319165153}
@@ -3029,7 +3033,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 1258409694}
   m_GameObject: {fileID: 1481836024}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -3202,7 +3206,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 1577348208}
   m_GameObject: {fileID: 1569373877}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -3877,7 +3881,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 1452479277}
   m_GameObject: {fileID: 1851018679}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -4084,7 +4088,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 1750235245}
   m_GameObject: {fileID: 1913369356}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
