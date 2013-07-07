@@ -34,14 +34,6 @@ public class Player : Actor
 		{
 			inputDelta.x += 1;
 		}
-		
-		if (Input.GetKey(KeyCode.E))
-		{
-			if ((Registry.Instance.townsfolk.transform.position - this.transform.position).magnitude < 100)
-			{
-				Registry.Instance.townsfolk.stealFrom();
-			}
-		}
 
 		if (inputDelta == Vector3.zero)
 		{

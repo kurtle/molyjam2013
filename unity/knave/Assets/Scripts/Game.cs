@@ -74,4 +74,9 @@ public class Game
 	{
 		return (int)(Time.time * 1000);
 	}
+
+	public static Vector3 getRandomGroundPosition(Rect bounds)
+	{
+		return new Vector3(Random.Range(bounds.xMin, bounds.xMax), 0, Random.Range(bounds.yMin, bounds.yMax));
+	}
 }
