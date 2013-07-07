@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: farmer
-  m_Shader: {fileID: 7, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_SavedProperties:
     serializedVersion: 2
@@ -16,8 +16,8 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 4d82f5f18a3494321b703a3a8e51e962, type: 3}
-          m_Scale: {x: .142857, y: 1}
+          m_Texture: {fileID: 2800000, guid: b9d1f13a5b6de0d4689976887f5704a1, type: 3}
+          m_Scale: {x: .0900000036, y: .600000024}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}
     m_Colors:

@@ -72,7 +72,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a77b30530be5340bcbdecaa6e1b381f1, type: 2}
+  - {fileID: 2100000, guid: 35d1b50c29e5dcc46bad76f36aa82c30, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aae4770fdc480d240a34ea30b1ca7e3c, type: 3}
   m_Name: 
-  totalFrames: 10
-  framePercentHeight: 1
+  totalFrames: 12.8000002
+  framePercentHeight: .600000024
 --- !u!195 &19500000
 NavMeshAgent:
   m_ObjectHideFlags: 1

@@ -16,7 +16,7 @@ public class Townsfolk : Agent
 	protected void Start()
 	{
 		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
-		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 6, 150, WrapMode.Loop));
+		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 5, 150, WrapMode.Loop));
 		this.spriteAnimation.play(ANIM_WALK);
 	}
 	
