@@ -45,7 +45,7 @@ public class Townsfolk : Agent
 			}
 		}
 		
-		if (Game.time() > this.lastBehaviorChangeTime + 10000) {
+		if (Game.gameTime() > this.lastBehaviorChangeTime + 10000) {
 			this.changeState(TOWNSF_BEHAVIOR_MILL);
 		}
 		
