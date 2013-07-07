@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Actor : MonoBehaviour
 {
+	public bool debugEnabled = false;
+	
 	public float speed;
 
 	public void moveDelta(Vector3 delta)

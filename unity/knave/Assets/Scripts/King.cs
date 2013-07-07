@@ -7,4 +7,9 @@ public class King : Agent
 	{
 		this.setDestination(new Vector3(5, 0, 7));
 	}
+
+	protected override void FixedUpdate()
+	{
+		base.FixedUpdate();
+	}
 }

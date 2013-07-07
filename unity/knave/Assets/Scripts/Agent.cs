@@ -3,14 +3,16 @@ using System.Collections;
 
 public class Agent : Actor
 {
-	public bool debugEnabled = false;
-
 	public NavMeshAgent navMeshAgent;
 
 	private NavMeshPath currentPath;
 	private int currentCornerIndex;
 
-	private void Awake()
+	protected string behaviorState;
+	protected int numStateChanges;
+	protected int lastBehaviorChangeTime;
+
+	protected virtual void Awake()
 	{
 		if (this.navMeshAgent == null)
 		{
@@ -18,7 +20,7 @@ public class Agent : Actor
 		}
 	}
 
-	private void FixedUpdate()
+	protected virtual void FixedUpdate()
 	{
 		if (this.currentPath == null)
 		{
@@ -66,5 +68,39 @@ public class Agent : Actor
 		this.currentPath = null;
 
 		this.navMeshAgent.SetDestination(dest);
+	}
+
+	public bool seesPlayer()
+	{
+		Vector3 agentPos = this.transform.position;
+		Vector3 playerPos = Registry.Instance.player.transform.position;
+
+		RaycastHit hitInfo;
+		if (Physics.Raycast(agentPos, playerPos - agentPos, out hitInfo))
+		{
+			if (hitInfo.rigidbody == null)
+			{
+				// wall collision!
+				return false;
+			}
+			else if (hitInfo.collider.gameObject == Registry.Instance.player.gameObject)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	protected void changeState(string newState)
+	{
+		this.numStateChanges += 1;
+		this.behaviorState = newState;
+		this.lastBehaviorChangeTime = Game.time();
+
+		if (this.debugEnabled)
+		{
+			Debug.Log("State: " + this.behaviorState + " (Num " + this.numStateChanges + ")");
+		}
 	}
 }
