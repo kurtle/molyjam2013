@@ -196,12 +196,18 @@ public class Police : Agent
 			changeState(POL_BEHAVIOR_PATROL);
 		}
 	}
+
 	public void informPlayerPosition(Vector3 lastPos)
 	{
 		this.isPlayerMarked = true;
 		changeState(POL_BEHAVIOR_DESTINATION);
 		this.setPathfindingEnabled(true);
 		this.setDestination(lastPos);
+	}
+
+	public override bool isAngry()
+	{
+		return (this.behaviorState == POL_BEHAVIOR_DESTINATION);
 	}
 
 	private void emote(uint emoteIndex)

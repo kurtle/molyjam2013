@@ -18,6 +18,8 @@ public class Registry : MonoBehaviour
 	
 	public Townsfolk townsfolk;
 
+	public List<Agent> citizenList = new List<Agent>();
+
 	private void Awake()
 	{
 		_instance = this;
@@ -25,6 +27,11 @@ public class Registry : MonoBehaviour
 		policeList.Add(police2);
 		policeList.Add(police3);
 
+		foreach (Police p in policeList)
+		{
+			citizenList.Add(p);
+		}
+		citizenList.Add(townsfolk);
 	}
 
 	public static Registry Instance

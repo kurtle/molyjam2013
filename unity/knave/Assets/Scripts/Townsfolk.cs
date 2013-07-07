@@ -205,6 +205,13 @@ public class Townsfolk : Agent
 		startAghast();
 	}
 
+	public override bool isAngry()
+	{
+		return (this.behaviorState == TOWNSF_BEHAVIOR_AGHAST ||
+				this.behaviorState == TOWNSF_BEHAVIOR_FLEE ||
+				this.behaviorState == TOWNSF_BEHAVIOR_SEEKPOLICE);
+	}
+
 	private void startDoze()
 	{
 		this.changeState(TOWNSF_BEHAVIOR_DOZE);

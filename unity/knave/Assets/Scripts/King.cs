@@ -31,6 +31,29 @@ public class King : Agent
 		this.changeStateAt = Game.gameTime() + Random.Range(loiterMinTime, loiterMaxTime);
 	}
 
+	private void OnCollisionEnter(Collision info)
+	{
+		if (info.gameObject == Registry.Instance.player.gameObject)
+		{
+			Vector3 myPos = this.transform.position;
+			bool success = true;
+			foreach (Agent citizen in Registry.Instance.citizenList)
+			{
+				const float checkDistance = 5f;
+				if (citizen.isAngry() && Vector3.Distance(myPos, citizen.transform.position) < checkDistance)
+				{
+
+				}
+				else
+				{
+					success = false;
+				}
+			}
+
+
+		}
+	}
+
 	protected override void FixedUpdate()
 	{
 		if (Game.gameTime() > this.changeStateAt)

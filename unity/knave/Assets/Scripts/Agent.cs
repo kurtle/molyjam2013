@@ -75,6 +75,11 @@ public class Agent : Actor
 		base.FixedUpdate();
 	}
 
+	public virtual bool isAngry()
+	{
+		return false;
+	}
+
 	public void setDestination(Vector3 dest)
 	{
 		this.currentPath = null;
