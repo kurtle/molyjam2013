@@ -51,7 +51,7 @@ public class King : Agent
 	private void startDawdle()
 	{		
 		this.setPathfindingEnabled(true);
-		this.setDestination(new Vector3(Random.Range(dawdleBounds.xMin, dawdleBounds.xMax), 0, Random.Range(dawdleBounds.yMin, dawdleBounds.yMax)));
+		this.setDestination(Game.getRandomGroundPosition(this.dawdleBounds));
 		this.spriteAnimation.play(ANIM_WALK);
 
 		changeState(KNG_BEHAVIOR_DAWDLE);

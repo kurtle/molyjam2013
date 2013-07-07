@@ -13,6 +13,7 @@ public class Agent : Actor
 	protected int lastBehaviorChangeTime;
 
 	private bool pathfindingEnabled;
+	private bool isFollowingPath;
 
 	protected virtual void Awake()
 	{
@@ -51,6 +52,7 @@ public class Agent : Actor
 					else
 					{
 						this.currentPath = null;
+						this.isFollowingPath = false;
 
 						this.navMeshAgent.ResetPath();
 					}
@@ -78,11 +80,13 @@ public class Agent : Actor
 		this.currentPath = null;
 
 		this.navMeshAgent.SetDestination(dest);
+
+		this.isFollowingPath = true;
 	}
 	
 	public bool isDestinationReached()
 	{
-		return this.currentPath == null;
+		return !this.isFollowingPath;
 	}
 
 
@@ -94,6 +98,7 @@ public class Agent : Actor
 			{
 				this.currentPath = null;
 				this.navMeshAgent.ResetPath();
+				this.isFollowingPath = false;
 			}
 
 			this.pathfindingEnabled = value;
