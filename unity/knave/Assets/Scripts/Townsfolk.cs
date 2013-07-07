@@ -15,6 +15,7 @@ public class Townsfolk : Agent
 	private const uint EMOTE_MARKED = 0;
 
 	public Popup emotePopup;
+	public GameObject coinEffectPrefab;
 
 	public int minMillTime, maxMillTime;
 	public int minDozeTime, maxDozeTime;
@@ -118,7 +119,7 @@ public class Townsfolk : Agent
 	
 	public void stealFrom()
 	{
-		// coin anim
+		GameObject.Instantiate(this.coinEffectPrefab, this.transform.position, Quaternion.identity);
 
 		startAghast();
 	}

@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: coinEffect
   m_TagString: Untagged
@@ -23,11 +24,22 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -.537299633, y: 0, z: 0, w: .843391418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7702eb04a25774f87e336b45cefce3, type: 3}
+  m_Name: 
+  duration: 2600
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -45,7 +57,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 3.5
+      scalar: 2.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -78,7 +90,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 0
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -278,7 +290,7 @@ ParticleSystem:
     enabled: 1
     type: 4
     radius: .349999994
-    angle: 15
+    angle: 10
     length: 5
     boxX: 1
     boxY: 1
@@ -322,7 +334,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 3
+    cnt0: 7
     cnt1: 30
     cnt2: 30
     cnt3: 30
@@ -539,7 +551,7 @@ ParticleSystem:
     cycles: 1
     randomRow: 0
   VelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       scalar: 1
       maxCurve:
@@ -631,7 +643,7 @@ ParticleSystem:
       minMaxState: 1
     inWorldSpace: 1
   ForceModule:
-    enabled: 0
+    enabled: 1
     x:
       scalar: 0
       maxCurve:
@@ -661,7 +673,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     y:
-      scalar: -30
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -689,7 +701,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     z:
-      scalar: 0
+      scalar: -40
       maxCurve:
         serializedVersion: 2
         m_Curve:
