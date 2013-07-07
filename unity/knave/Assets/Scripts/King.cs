@@ -23,7 +23,7 @@ public class King : Agent
 	{
 		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
 		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 4, 150, WrapMode.Loop));
-		this.spriteAnimation.play(ANIM_WALK);
+		this.spriteAnimation.play(ANIM_IDLE);
 
 		this.setPathfindingEnabled(true);
 
@@ -52,6 +52,8 @@ public class King : Agent
 	{		
 		this.setPathfindingEnabled(true);
 		this.setDestination(new Vector3(Random.Range(dawdleBounds.xMin, dawdleBounds.xMax), 0, Random.Range(dawdleBounds.yMin, dawdleBounds.yMax)));
+		this.spriteAnimation.play(ANIM_WALK);
+
 		changeState(KNG_BEHAVIOR_DAWDLE);
 		this.changeStateAt = Game.gameTime() + Random.Range(dawdleMinTime, dawdleMaxTime);
 	}
@@ -59,6 +61,8 @@ public class King : Agent
 	private void startLoiter()
 	{
 		this.setPathfindingEnabled(false);
+		this.spriteAnimation.play(ANIM_IDLE);
+
 		changeState(KNG_BEHAVIOR_LOITER);
 		this.changeStateAt = Game.gameTime() + Random.Range(loiterMinTime, loiterMaxTime);
 	}

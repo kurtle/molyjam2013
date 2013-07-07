@@ -779,8 +779,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 12.5
     y: -14.5
-    width: 7
-    height: 11
+    width: 3
+    height: 4
 --- !u!195 &364718167
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1162,11 +1162,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.height
-      value: 11
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.width
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
@@ -1760,8 +1760,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1851018680}
   - {fileID: 364718165}
+  - {fileID: 1851018680}
   - {fileID: 1569373878}
   - {fileID: 1481836025}
   - {fileID: 1319165153}
@@ -2748,11 +2748,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.y
-      value: -14.5
+      value: -8.5
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.height
-      value: 11
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.width
@@ -3058,10 +3058,10 @@ MonoBehaviour:
   dawdleMaxTime: 1000
   dawdleBounds:
     serializedVersion: 2
-    x: 12.5
-    y: -14.5
-    width: 7
-    height: 11
+    x: 16.5
+    y: -12.5
+    width: 3
+    height: 7
 --- !u!195 &1569373880
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3149,19 +3149,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.x
-      value: 12.5
+      value: 16.5
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.y
-      value: -14.5
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.height
-      value: 11
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
       propertyPath: dawdleBounds.width
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94e58bb2dd5e28b4da91d0106d7566f2, type: 2}
@@ -3695,9 +3695,9 @@ MonoBehaviour:
   dawdleBounds:
     serializedVersion: 2
     x: 12.5
-    y: -14.5
+    y: -8.5
     width: 7
-    height: 11
+    height: 5
 --- !u!195 &1851018682
 NavMeshAgent:
   m_ObjectHideFlags: 0
