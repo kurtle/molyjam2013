@@ -136,12 +136,13 @@ MonoBehaviour:
   m_Name: 
   debugEnabled: 0
   spriteAnimation: {fileID: 11400000}
-  speed: .00999999978
+  flipFacing: 1
+  speed: .00499999989
   navMeshAgent: {fileID: 19500000}
   loiterMinTime: 300
   loiterMaxTime: 1200
-  dawdleMinTime: 500
-  dawdleMaxTime: 800
+  dawdleMinTime: 800
+  dawdleMaxTime: 1000
   dawdleBounds:
     serializedVersion: 2
     x: 0
