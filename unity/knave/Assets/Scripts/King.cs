@@ -17,6 +17,9 @@ public class King : Agent
 
 	public Rect dawdleBounds;
 
+	public float endGameDistance = 7f;
+	public int requiredAngryCitizens = 4;
+
 	private int changeStateAt;
 	
 	private void Start()
@@ -36,21 +39,20 @@ public class King : Agent
 		if (info.gameObject == Registry.Instance.player.gameObject)
 		{
 			Vector3 myPos = this.transform.position;
-			bool success = true;
+
+			int angryCount = 0;
 			foreach (Agent citizen in Registry.Instance.citizenList)
 			{
-				const float checkDistance = 5f;
-				if (citizen.isAngry() && Vector3.Distance(myPos, citizen.transform.position) < checkDistance)
+				if (citizen.isAngry() && Vector3.Distance(myPos, citizen.transform.position) < this.endGameDistance)
 				{
-
-				}
-				else
-				{
-					success = false;
+					++angryCount;
 				}
 			}
 
-
+			if (angryCount >= this.requiredAngryCitizens)
+			{
+				Registry.Instance.endGame();
+			}
 		}
 	}
 

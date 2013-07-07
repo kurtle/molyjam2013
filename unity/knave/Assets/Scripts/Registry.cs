@@ -20,6 +20,8 @@ public class Registry : MonoBehaviour
 
 	public List<Agent> citizenList = new List<Agent>();
 
+	private bool gameOver;
+
 	private void Awake()
 	{
 		_instance = this;
@@ -39,6 +41,22 @@ public class Registry : MonoBehaviour
 		get
 		{
 			return _instance;
+		}
+	}
+
+	public void endGame()
+	{
+		this.gameOver = true;
+	}
+
+	private void OnGUI()
+	{
+		if (this.gameOver)
+		{
+			if (GUI.Button(new Rect(0, 0, 300, 250), "You win! Bad girl."))
+			{
+				Application.LoadLevel(0);
+			}
 		}
 	}
 }
