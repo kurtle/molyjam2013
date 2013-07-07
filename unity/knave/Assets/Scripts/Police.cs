@@ -17,6 +17,7 @@ public class Police : Agent
 	private const uint EMOTE_NONE = 999;
 	private const uint EMOTE_MARKED = 0;
 	private const uint EMOTE_ALERT = 1;
+	private const uint EMOTE_EMBARRASSED = 2;
 	
 	private Vector3 playerLastSeen;
 
@@ -190,7 +191,7 @@ public class Police : Agent
 	
 	private void updateEmbarrassedState()
 	{
-		emote(EMOTE_ALERT);
+		emote(EMOTE_EMBARRASSED);
 		if (Game.gameTime() > this.lastBehaviorChangeTime + 3000)
 		{
 			changeState(POL_BEHAVIOR_PATROL);
@@ -210,6 +211,7 @@ public class Police : Agent
 		{
 			case EMOTE_ALERT:
 			case EMOTE_MARKED:
+			case EMOTE_EMBARRASSED:
 				this.emotePopup.gameObject.SetActive(true);
 				this.emotePopup.playClip(emoteIndex);				
 				break;
