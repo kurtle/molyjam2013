@@ -184,6 +184,7 @@ MonoBehaviour:
   speed: .0250000004
   navMeshAgent: {fileID: 19500000}
   emotePopup: {fileID: 11400004}
+  coinEffectPrefab: {fileID: 100000, guid: 0d30308714ad302468f6d7d36c871c4e, type: 2}
   minMillTime: 2500
   maxMillTime: 8000
   minDozeTime: 1000
