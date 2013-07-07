@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   debugEnabled: 0
   spriteAnimation: {fileID: 11400002}
-  speed: .100000001
+  speed: .00999999978
   navMeshAgent: {fileID: 19500000}
   testVar: 3
   destination: {x: 17, y: 0, z: -13}
