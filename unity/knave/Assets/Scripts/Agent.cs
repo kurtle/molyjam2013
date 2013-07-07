@@ -124,7 +124,7 @@ public class Agent : Actor
 				float distance = Vector3.Distance(hitInfos[i].collider.transform.position, origin);
 				distanceToWall = Mathf.Min(distanceToWall, distance);
 			}
-			else if (hitInfos[i].collider.gameObject == Registry.Instance.player.gameObject)
+			else if (hitInfos[i].collider.gameObject == entity.gameObject)
 			{
 				// player case
 				distanceToPlayer = Vector3.Distance(origin, entityPos);

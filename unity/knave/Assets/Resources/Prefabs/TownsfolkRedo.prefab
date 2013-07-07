@@ -195,6 +195,9 @@ MonoBehaviour:
     y: -15
     width: 40
     height: 30
+  scareDistance: 3
+  informPoliceDistance: 2
+  aghastSpeed: .0549999997
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

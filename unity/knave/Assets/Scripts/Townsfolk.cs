@@ -7,6 +7,8 @@ public class Townsfolk : Agent
 	public const string TOWNSF_BEHAVIOR_DOZE = "DOZE";
 
 	public const string TOWNSF_BEHAVIOR_AGHAST = "AGHAST";
+	public const string TOWNSF_BEHAVIOR_SEEKPOLICE = "SEEKPOLICE";
+	public const string TOWNSF_BEHAVIOR_FLEE = "FLEE";
 
 	private const string ANIM_IDLE = "idle";
 	private const string ANIM_WALK = "walk";
@@ -21,15 +23,25 @@ public class Townsfolk : Agent
 	public int minDozeTime, maxDozeTime;
 
 	public Rect millBounds;
+
+	public int scareDistance; // how close to player i can be before running
+	public int informPoliceDistance; // how close to police i must be to inform them
+
+	public float aghastSpeed;
 	
 	private Vector3 playerLastSeen;
 	private int aghastTime;
 	private int dozeTime;
 	private int millTime;
+
+	private Police policeToSeek;
+	private float baseSpeed;
 	
 	protected override void Awake()
 	{
 		this.playerLastSeen = this.transform.position;
+
+		this.baseSpeed = this.speed;
 	}
 
 	protected void Start()
@@ -55,6 +67,14 @@ public class Townsfolk : Agent
 		{
 			updateDozeState();
 		}
+		else if (this.behaviorState == TOWNSF_BEHAVIOR_SEEKPOLICE)
+		{
+			updateSeekPoliceState();
+		}
+		else if (this.behaviorState == TOWNSF_BEHAVIOR_FLEE)
+		{
+			updateFleeState();
+		}
 
 		base.FixedUpdate();
 	}
@@ -67,28 +87,89 @@ public class Townsfolk : Agent
 		}
 	}
 
-	private void updateAghastState()
+	private void updateFleeState()
 	{
 		emote(EMOTE_MARKED);
+
+		Vector3 myPos = this.transform.position;
+		Vector3 playerPos = Registry.Instance.player.transform.position;
+		float distToPlayer = Vector3.Distance(playerPos, myPos);
 
 		if (seesEntity(Registry.Instance.player))
 		{
 			playerLastSeen = Registry.Instance.player.transform.position;
 		}
 
-		/*foreach (Police p in Registry.Instance.policeList)
+		if (this.isDestinationReached() || (distToPlayer > 2 * this.scareDistance))
 		{
-			if (this.seesEntity(p)) //&& p.isDestinationReached())
+			startAghast();
+		}
+	}
+
+	private void updateSeekPoliceState()
+	{
+		Vector3 myPos = this.transform.position;
+		Vector3 playerPos = Registry.Instance.player.transform.position;
+		Vector3 policePos = this.policeToSeek.transform.position;
+		float distToPlayer = Vector3.Distance(playerPos, myPos);
+
+		emote(EMOTE_MARKED);
+
+		if (seesEntity(Registry.Instance.player))
+		{
+			playerLastSeen = Registry.Instance.player.transform.position;
+
+			if (distToPlayer < this.scareDistance)
 			{
-				p.informPlayerPosition(playerLastSeen);
-				this.changeState(TOWNSF_BEHAVIOR_MILL);
-				this.spriteAnimation.play(ANIM_WALK, true);
+				startFlee();
+
+				return;
 			}
-		}*/
+		}
+
+		if (Vector3.Distance(policePos, myPos) < this.informPoliceDistance)
+		{
+			this.policeToSeek.informPlayerPosition(playerLastSeen);
+			startMill();
+
+			return;
+		}
+		else if (this.isDestinationReached())
+		{
+			this.setDestination(policePos);
+		}
+	}
+
+	private void updateAghastState()
+	{
+		Vector3 myPos = this.transform.position;
+		Vector3 playerPos = Registry.Instance.player.transform.position;
+		float distToPlayer = Vector3.Distance(playerPos, myPos);
+
+		emote(EMOTE_MARKED);
+
+		if (seesEntity(Registry.Instance.player) && distToPlayer < this.scareDistance)
+		{
+			startFlee();
+
+			return;
+		}
+
+		foreach (Police p in Registry.Instance.policeList)
+		{
+			if (this.seesEntity(p))
+			{
+				startSeekPolice(p);
+
+				return;
+			}
+		}
 		
 		if (Game.gameTime() > this.aghastTime)
 		{
 			startMill();
+
+			return;
 		}		
 	}
 
@@ -130,6 +211,7 @@ public class Townsfolk : Agent
 		this.setPathfindingEnabled(false);
 		this.spriteAnimation.play(ANIM_IDLE);
 		this.dozeTime = Game.gameTime() + Random.Range(minDozeTime, maxDozeTime);
+		this.speed = this.baseSpeed;
 	}
 
 	private void startMill()
@@ -139,14 +221,40 @@ public class Townsfolk : Agent
 		this.setDestination(Game.getRandomGroundPosition(this.millBounds));
 		this.spriteAnimation.play(ANIM_WALK, true);
 		this.millTime = Game.gameTime() + Random.Range(minMillTime, maxMillTime);
+		this.speed = this.baseSpeed;
 	}
 
 	private void startAghast()
 	{
 		this.changeState(TOWNSF_BEHAVIOR_AGHAST);
-		this.setPathfindingEnabled(true);
+		this.setPathfindingEnabled(false);
 		this.spriteAnimation.play(ANIM_IDLE, true);
 		this.aghastTime = Game.gameTime() + 10000;
+		this.speed = this.aghastSpeed;
+	}
+
+	private void startFlee()
+	{
+		this.changeState(TOWNSF_BEHAVIOR_FLEE);
+		this.setPathfindingEnabled(true);
+		this.spriteAnimation.play(ANIM_WALK, true);
+
+		Vector3 myPos = this.transform.position;
+		Vector3 playerPos = Registry.Instance.player.transform.position;
+
+		this.setDestination(myPos + 5 * (myPos - playerPos).normalized);
+		this.speed = this.aghastSpeed;
+	}
+
+	private void startSeekPolice(Police p)
+	{
+		this.changeState(TOWNSF_BEHAVIOR_SEEKPOLICE);
+		this.setPathfindingEnabled(true);
+		this.spriteAnimation.play(ANIM_WALK, true);
+
+		this.policeToSeek = p;
+		this.setDestination(p.transform.position);
+		this.speed = this.aghastSpeed;
 	}
 
 	private void emote(uint emoteIndex)
