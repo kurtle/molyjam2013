@@ -62,8 +62,16 @@ public class Game
 		return Vector3.zero;
 	}
 
-	public static int time()
+	public static int deltaTime()
+	{
+		return (int)(Time.deltaTime * 1000);
+	}
+	public static int gameTime()
 	{
 		return (int)(Time.fixedTime * 1000);
+	}
+	public static int renderTime()
+	{
+		return (int)(Time.time * 1000);
 	}
 }
