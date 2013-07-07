@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Registry : MonoBehaviour
 {
@@ -8,10 +9,22 @@ public class Registry : MonoBehaviour
 	public Player player;
 
 	public King king;
+	
+	public Police police1;
+	public Police police2;
+	public Police police3;
+	
+	public List<Police> policeList = new List<Police>();
+	
+	public Townsfolk townsfolk;
 
 	private void Awake()
 	{
 		_instance = this;
+		policeList.Add(police1);
+		policeList.Add(police2);
+		policeList.Add(police3);
+
 	}
 
 	public static Registry Instance

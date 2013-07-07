@@ -7,9 +7,11 @@ public class Police : Agent
 	public const string POL_BEHAVIOR_MARKED = "MARKED";
 	public const string POL_BEHAVIOR_ALERT = "ALERT";
 
+	public const string POL_BEHAVIOR_DESTINATION = "DESTINATION";
+
+
 	private const string ANIM_IDLE = "idle";
 	private const string ANIM_WALK = "walk";
-
 	private Game.Direction patrolDirection;
 
 	private bool justCollided;
@@ -21,7 +23,8 @@ public class Police : Agent
 		this.spriteAnimation.play(ANIM_IDLE);
 
 		this.changeState(POL_BEHAVIOR_PATROL);
-		this.patrolDirection = Game.Direction.UP;
+		this.patrolDirection = Game.Direction.LEFT;
+		//this.destination = this.transform.position;
 	}
 
 	protected void OnCollisionEnter()
@@ -43,6 +46,11 @@ public class Police : Agent
 		{
 			updateAlertState();
 		}
+		else if (this.behaviorState == POL_BEHAVIOR_DESTINATION)
+		{
+			updateDestinationState();
+		}
+
 
 		this.justCollided = false;
 
@@ -51,7 +59,7 @@ public class Police : Agent
 
 	private void updatePatrolState()
 	{
-		if (seesPlayer())
+		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
 		}
@@ -70,7 +78,7 @@ public class Police : Agent
 
 	private void updateMarkedState()
 	{
-		if (seesPlayer())
+		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
 
@@ -89,7 +97,7 @@ public class Police : Agent
 
 	private void updateAlertState()
 	{
-		if (seesPlayer())
+		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
 		}
@@ -104,4 +112,25 @@ public class Police : Agent
 			this.spriteAnimation.play(ANIM_WALK, true);
 		}
 	}
+	
+	private void updateDestinationState()
+	{
+		base.FixedUpdate();
+		if (seesEntity(Registry.Instance.player))
+		{
+			changeState(POL_BEHAVIOR_MARKED);
+			this.navMeshAgent.ResetPath();
+		} else if (this.isDestinationReached())
+		{
+			changeState(POL_BEHAVIOR_PATROL);
+		}
+	}
+	
+	public void informPlayerPosition(Vector3 lastPos)
+	{
+		changeState(POL_BEHAVIOR_DESTINATION);
+		//destination = lastPos;
+		this.setDestination(lastPos);
+	}
+	
 }
