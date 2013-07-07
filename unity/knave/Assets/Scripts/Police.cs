@@ -14,7 +14,7 @@ public class Police : Agent
 
 	private bool justCollided;
 
-	protected override void Awake()
+	protected void Start()
 	{
 		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
 		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 6, 150, WrapMode.Loop));

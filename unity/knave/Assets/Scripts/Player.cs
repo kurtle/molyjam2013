@@ -6,7 +6,7 @@ public class Player : Actor
 	private const string ANIM_IDLE = "idle";
 	private const string ANIM_WALK = "walk";
 
-	protected void Awake()
+	protected void Start()
 	{
 		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
 		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(0, 3, 150, WrapMode.Loop));
@@ -45,7 +45,7 @@ public class Player : Actor
 		}
 
 		this.moveDelta(inputDelta.normalized);
-		
+
 		base.FixedUpdate();
 	}
 }
