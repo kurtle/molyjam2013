@@ -7,12 +7,19 @@ public class Police : Agent
 	public const string POL_BEHAVIOR_MARKED = "MARKED";
 	public const string POL_BEHAVIOR_ALERT = "ALERT";
 
+	private const string ANIM_IDLE = "idle";
+	private const string ANIM_WALK = "walk";
+
 	private Game.Direction patrolDirection;
 
 	private bool justCollided;
 
 	protected override void Awake()
 	{
+		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
+		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 6, 150, WrapMode.Loop));
+		this.spriteAnimation.play(ANIM_IDLE);
+
 		this.changeState(POL_BEHAVIOR_PATROL);
 		this.patrolDirection = Game.Direction.UP;
 	}
@@ -23,7 +30,7 @@ public class Police : Agent
 	}
 
 	protected override void FixedUpdate()
-	{
+	{		
 		if (this.behaviorState == POL_BEHAVIOR_PATROL)
 		{
 			updatePatrolState();
@@ -38,6 +45,8 @@ public class Police : Agent
 		}
 
 		this.justCollided = false;
+
+		base.FixedUpdate();
 	}
 
 	private void updatePatrolState()
@@ -54,6 +63,8 @@ public class Police : Agent
 			}
 
 			this.moveDelta(Game.directionVector(this.patrolDirection));
+
+			this.spriteAnimation.play(ANIM_WALK, true);
 		}
 	}
 
@@ -67,6 +78,8 @@ public class Police : Agent
 			Vector3 myPos = this.transform.position;
 
 			this.moveDelta((playerPos - myPos).normalized);
+
+			this.spriteAnimation.play(ANIM_WALK, true);
 		}
 		else
 		{
@@ -80,13 +93,15 @@ public class Police : Agent
 		{
 			changeState(POL_BEHAVIOR_MARKED);
 		}
-		else if (Game.time() > this.lastBehaviorChangeTime + 3000)
+		else if (Game.gameTime() > this.lastBehaviorChangeTime + 3000)
 		{
 			changeState(POL_BEHAVIOR_PATROL);
 		}
 		else
 		{
 			this.moveDelta(Game.directionVector(Game.randomDirection()));
+
+			this.spriteAnimation.play(ANIM_WALK, true);
 		}
 	}
 }

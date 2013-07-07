@@ -3,7 +3,18 @@ using System.Collections;
 
 public class Player : Actor 
 {
-	private void FixedUpdate()
+	private const string ANIM_IDLE = "idle";
+	private const string ANIM_WALK = "walk";
+
+	protected void Awake()
+	{
+		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
+		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(0, 3, 150, WrapMode.Loop));
+
+		this.spriteAnimation.play(ANIM_IDLE);
+	}
+
+	protected override void FixedUpdate()
 	{
 		Vector3 inputDelta = Vector3.zero;
 
@@ -24,6 +35,17 @@ public class Player : Actor
 			inputDelta.x += 1;
 		}
 
+		if (inputDelta == Vector3.zero)
+		{
+			this.spriteAnimation.play(ANIM_IDLE);
+		}
+		else
+		{
+			this.spriteAnimation.play(ANIM_WALK);
+		}
+
 		this.moveDelta(inputDelta.normalized);
+		
+		base.FixedUpdate();
 	}
 }

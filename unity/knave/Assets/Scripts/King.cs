@@ -8,6 +8,7 @@ public class King : Agent
 	
 	private void Start()
 	{
+		this.setPathfindingEnabled(true);
 		this.setDestination(destination);
 	}
 

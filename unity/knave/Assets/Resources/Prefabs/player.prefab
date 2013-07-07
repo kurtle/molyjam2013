@@ -12,7 +12,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: actor
+  m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2108c663d6a38469b36751552249c5, type: 3}
   m_Name: 
   debugEnabled: 0
+  spriteAnimation: {fileID: 11400002}
   speed: .100000001
 --- !u!114 &11400002
 MonoBehaviour:
@@ -133,7 +134,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aae4770fdc480d240a34ea30b1ca7e3c, type: 3}
   m_Name: 
-  totalFrames: 0
+  totalFrames: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
