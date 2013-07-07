@@ -119,10 +119,12 @@ public class Police : Agent
 		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
+			this.setPathfindingEnabled(false);
 			this.navMeshAgent.ResetPath();
 		} else if (this.isDestinationReached())
 		{
 			changeState(POL_BEHAVIOR_PATROL);
+			this.setPathfindingEnabled(false);
 		}
 	}
 	
@@ -131,6 +133,7 @@ public class Police : Agent
 		changeState(POL_BEHAVIOR_DESTINATION);
 		//destination = lastPos;
 		this.setDestination(lastPos);
+		this.setPathfindingEnabled(true);
 	}
 	
 }
