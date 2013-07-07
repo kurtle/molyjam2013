@@ -102,24 +102,30 @@ public class Agent : Actor
 
 	public bool seesEntity(Actor entity)
 	{
-		Vector3 agentPos = this.transform.position;
+		Vector3 origin = this.transform.position;
 		Vector3 entityPos = entity.transform.position;
 
-		RaycastHit hitInfo;
-		if (Physics.Raycast(agentPos, entityPos - agentPos, out hitInfo))
+		RaycastHit[] hitInfos;
+		hitInfos = Physics.RaycastAll(origin, entityPos - origin);
+
+		float distanceToWall = float.MaxValue;
+		float distanceToPlayer = float.MaxValue;
+		for (int i = 0; i < hitInfos.Length; ++i)
 		{
-			if (hitInfo.rigidbody == null)
+			if (hitInfos[i].rigidbody == null)
 			{
-				// wall collision!
-				return false;
+				// wall case
+				float distance = Vector3.Distance(hitInfos[i].collider.transform.position, origin);
+				distanceToWall = Mathf.Min(distanceToWall, distance);
 			}
-			else if (hitInfo.collider.gameObject == entity.gameObject)
+			else if (hitInfos[i].collider.gameObject == Registry.Instance.player.gameObject)
 			{
-				return true;
+				// player case
+				distanceToPlayer = Vector3.Distance(origin, entityPos);
 			}
 		}
 
-		return false;
+		return (distanceToPlayer < distanceToWall);
 	}
 
 	protected void changeState(string newState)
