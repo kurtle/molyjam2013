@@ -35,6 +35,11 @@ public class Game
 		return Direction.NONE;
 	}
 
+	public static Direction randomDirection()
+	{
+		return (Game.Direction)Random.Range((int)Direction.UP, (int)Direction.LEFT);
+	}
+
 	public static Vector3 directionVector(Direction dir)
 	{
 		if (dir == Direction.UP)
