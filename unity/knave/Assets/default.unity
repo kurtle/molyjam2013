@@ -1600,6 +1600,7 @@ Transform:
   - {fileID: 1892401772}
   - {fileID: 1951682380}
   - {fileID: 501815495}
+  - {fileID: 1221431843}
   - {fileID: 1656447033}
   - {fileID: 353576598}
   - {fileID: 428830487}
@@ -1610,7 +1611,6 @@ Transform:
   - {fileID: 1247460150}
   - {fileID: 874576529}
   - {fileID: 885463788}
-  - {fileID: 1221431843}
   m_Father: {fileID: 0}
 --- !u!1001 &1110908225
 Prefab:
@@ -3114,7 +3114,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2f2dc666e66ebae4aa78f68fc4017f21, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
