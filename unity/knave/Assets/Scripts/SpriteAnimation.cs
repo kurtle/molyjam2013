@@ -62,6 +62,12 @@ public class SpriteAnimation : MonoBehaviour
 		if (this.nextFrameTime <= 0)
 		{
 			++this.currentFrame;
+			
+			Clip curClip = this.currentClip;
+			if (curClip == null)
+			{
+				Debug.LogError("Cur Clip is Null.");
+			}
 
 			if (this.currentFrame > this.currentClip.startFrame + this.currentClip.numFrames - 1)
 			{
