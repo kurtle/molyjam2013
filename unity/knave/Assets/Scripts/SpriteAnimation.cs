@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SpriteAnimation : MonoBehaviour
 {
 	[Serializable]
-	public struct Clip
+	public class Clip
 	{
 		[SerializeField]
 		public int startFrame;
