@@ -124,10 +124,19 @@ MonoBehaviour:
   m_Name: 
   debugEnabled: 0
   spriteAnimation: {fileID: 11400002}
+  flipFacing: 0
   speed: .00999999978
   navMeshAgent: {fileID: 19500000}
-  testVar: 3
-  destination: {x: 17, y: 0, z: -13}
+  loiterMinTime: 1500
+  loiterMaxTime: 7500
+  dawdleMinTime: 2500
+  dawdleMaxTime: 9000
+  dawdleBounds:
+    serializedVersion: 2
+    x: -15
+    y: -15
+    width: 30
+    height: 30
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,7 +156,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .707000017
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50

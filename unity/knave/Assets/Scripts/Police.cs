@@ -9,9 +9,15 @@ public class Police : Agent
 
 	public const string POL_BEHAVIOR_DESTINATION = "DESTINATION";
 
+	public Popup emotePopup;
 
 	private const string ANIM_IDLE = "idle";
 	private const string ANIM_WALK = "walk";
+
+	private const uint EMOTE_NONE = 999;
+	private const uint EMOTE_MARKED = 0;
+	private const uint EMOTE_ALERT = 1;
+
 	private Game.Direction patrolDirection;
 
 	private bool justCollided;
@@ -33,7 +39,7 @@ public class Police : Agent
 	}
 
 	protected override void FixedUpdate()
-	{		
+	{
 		if (this.behaviorState == POL_BEHAVIOR_PATROL)
 		{
 			updatePatrolState();
@@ -59,6 +65,8 @@ public class Police : Agent
 
 	private void updatePatrolState()
 	{
+		emote(EMOTE_NONE);
+
 		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
@@ -69,7 +77,6 @@ public class Police : Agent
 			{
 				this.patrolDirection = Game.reverseDirection(this.patrolDirection);
 			}
-
 			this.moveDelta(Game.directionVector(this.patrolDirection));
 
 			this.spriteAnimation.play(ANIM_WALK, true);
@@ -78,6 +85,8 @@ public class Police : Agent
 
 	private void updateMarkedState()
 	{
+		emote(EMOTE_MARKED);
+
 		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
@@ -97,6 +106,8 @@ public class Police : Agent
 
 	private void updateAlertState()
 	{
+		emote(EMOTE_ALERT);
+
 		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
@@ -115,12 +126,10 @@ public class Police : Agent
 	
 	private void updateDestinationState()
 	{
-		base.FixedUpdate();
 		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
 			this.setPathfindingEnabled(false);
-			this.navMeshAgent.ResetPath();
 		} else if (this.isDestinationReached())
 		{
 			changeState(POL_BEHAVIOR_PATROL);
@@ -132,8 +141,23 @@ public class Police : Agent
 	{
 		changeState(POL_BEHAVIOR_DESTINATION);
 		//destination = lastPos;
-		this.setDestination(lastPos);
 		this.setPathfindingEnabled(true);
+		this.setDestination(lastPos);
 	}
-	
+
+	private void emote(uint emoteIndex)
+	{
+		switch (emoteIndex)
+		{
+			case EMOTE_ALERT:
+			case EMOTE_MARKED:
+				this.emotePopup.gameObject.SetActive(true);
+				this.emotePopup.playClip(emoteIndex);				
+				break;
+
+			default:
+				this.emotePopup.gameObject.SetActive(false);
+				break;
+		}
+	}	
 }

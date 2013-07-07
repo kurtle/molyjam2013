@@ -9,8 +9,13 @@ public class King : Agent
 	private const string ANIM_IDLE = "idle";
 	private const string ANIM_WALK = "walk";
 
-	public int testVar = 3;
-	public Vector3 destination = new Vector3(17, 0, -13);
+	public int loiterMinTime = 1500;
+	public int loiterMaxTime = 7500;
+
+	public int dawdleMinTime = 2500;
+	public int dawdleMaxTime = 9000;
+
+	public Rect dawdleBounds;
 
 	private int changeStateAt;
 	
@@ -18,12 +23,12 @@ public class King : Agent
 	{
 		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
 		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 4, 150, WrapMode.Loop));
-		this.spriteAnimation.play(ANIM_WALK);
+		this.spriteAnimation.play(ANIM_IDLE);
 
 		this.setPathfindingEnabled(true);
 
 		this.changeState(KNG_BEHAVIOR_LOITER);
-		this.changeStateAt = Game.gameTime() + Random.Range(1500, 7500);
+		this.changeStateAt = Game.gameTime() + Random.Range(loiterMinTime, loiterMaxTime);
 	}
 
 	protected override void FixedUpdate()
@@ -44,15 +49,21 @@ public class King : Agent
 	}
 
 	private void startDawdle()
-	{
-		this.setDestination(new Vector3(Random.Range(-15f, 15f), 0, Random.Range(-15f, 15f)));
+	{		
+		this.setPathfindingEnabled(true);
+		this.setDestination(new Vector3(Random.Range(dawdleBounds.xMin, dawdleBounds.xMax), 0, Random.Range(dawdleBounds.yMin, dawdleBounds.yMax)));
+		this.spriteAnimation.play(ANIM_WALK);
+
 		changeState(KNG_BEHAVIOR_DAWDLE);
-		this.changeStateAt = Game.gameTime() + Random.Range(2500, 9000);
+		this.changeStateAt = Game.gameTime() + Random.Range(dawdleMinTime, dawdleMaxTime);
 	}
 
 	private void startLoiter()
 	{
+		this.setPathfindingEnabled(false);
+		this.spriteAnimation.play(ANIM_IDLE);
+
 		changeState(KNG_BEHAVIOR_LOITER);
-		this.changeStateAt = Game.gameTime() + Random.Range(1500, 7500);
+		this.changeStateAt = Game.gameTime() + Random.Range(loiterMinTime, loiterMaxTime);
 	}
 }

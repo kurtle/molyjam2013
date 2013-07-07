@@ -51,6 +51,8 @@ public class Agent : Actor
 					else
 					{
 						this.currentPath = null;
+
+						this.navMeshAgent.ResetPath();
 					}
 				}
 				else
@@ -88,7 +90,11 @@ public class Agent : Actor
 	{
 		if (this.pathfindingEnabled != value)
 		{
-			this.currentPath = null;
+			if (!value)
+			{
+				this.currentPath = null;
+				this.navMeshAgent.ResetPath();
+			}
 
 			this.pathfindingEnabled = value;
 		}
