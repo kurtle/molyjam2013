@@ -79,6 +79,7 @@ public class Agent : Actor
 	{
 		this.currentPath = null;
 
+		this.navMeshAgent.ResetPath();
 		this.navMeshAgent.SetDestination(dest);
 
 		this.isFollowingPath = true;
