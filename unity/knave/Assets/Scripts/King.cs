@@ -49,7 +49,7 @@ public class King : Agent
 	}
 
 	private void startDawdle()
-	{		
+	{
 		this.setPathfindingEnabled(true);
 		this.setDestination(Game.getRandomGroundPosition(this.dawdleBounds));
 		this.spriteAnimation.play(ANIM_WALK);

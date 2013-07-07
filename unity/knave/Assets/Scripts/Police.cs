@@ -17,10 +17,13 @@ public class Police : Agent
 	private const uint EMOTE_NONE = 999;
 	private const uint EMOTE_MARKED = 0;
 	private const uint EMOTE_ALERT = 1;
+	
+	private Vector3 playerLastSeen;
 
 	private Game.Direction patrolDirection;
 
 	private bool justCollided;
+	private float baseSpeed;
 
 	protected void Start()
 	{
@@ -30,6 +33,9 @@ public class Police : Agent
 
 		this.changeState(POL_BEHAVIOR_PATROL);
 		this.patrolDirection = Game.Direction.LEFT;
+		
+		this.baseSpeed = speed;
+		this.setPathfindingEnabled(false);
 		//this.destination = this.transform.position;
 	}
 
@@ -40,6 +46,11 @@ public class Police : Agent
 
 	protected override void FixedUpdate()
 	{
+		if (seesEntity(Registry.Instance.player))
+		{
+			playerLastSeen = Registry.Instance.player.transform.position;
+		}
+		
 		if (this.behaviorState == POL_BEHAVIOR_PATROL)
 		{
 			updatePatrolState();
@@ -90,6 +101,8 @@ public class Police : Agent
 		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
+			
+			this.speed = baseSpeed * 1.3f;
 
 			Vector3 playerPos = Registry.Instance.player.transform.position;
 			Vector3 myPos = this.transform.position;
@@ -97,10 +110,9 @@ public class Police : Agent
 			this.moveDelta((playerPos - myPos).normalized);
 
 			this.spriteAnimation.play(ANIM_WALK, true);
-		}
-		else
+		} else 
 		{
-			changeState(POL_BEHAVIOR_ALERT);
+			this.informPlayerPosition(playerLastSeen);
 		}
 	}
 
@@ -114,6 +126,7 @@ public class Police : Agent
 		}
 		else if (Game.gameTime() > this.lastBehaviorChangeTime + 3000)
 		{
+			this.speed = baseSpeed;
 			changeState(POL_BEHAVIOR_PATROL);
 		}
 		else
@@ -126,6 +139,7 @@ public class Police : Agent
 	
 	private void updateDestinationState()
 	{
+		emote(EMOTE_NONE);
 		if (seesEntity(Registry.Instance.player))
 		{
 			changeState(POL_BEHAVIOR_MARKED);
