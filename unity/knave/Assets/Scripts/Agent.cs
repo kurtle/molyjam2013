@@ -18,6 +18,7 @@ public class Agent : Actor
 		{
 			Debug.LogError("NO NAVMESHAGENT assigned to " + this);
 		}
+		this.currentPath = null;
 	}
 
 	protected virtual void FixedUpdate()
@@ -69,21 +70,26 @@ public class Agent : Actor
 
 		this.navMeshAgent.SetDestination(dest);
 	}
+	
+	public bool isDestinationReached()
+	{
+		return this.currentPath == null;
+	}
 
-	public bool seesPlayer()
+	public bool seesEntity(Actor entity)
 	{
 		Vector3 agentPos = this.transform.position;
-		Vector3 playerPos = Registry.Instance.player.transform.position;
+		Vector3 entityPos = entity.transform.position;
 
 		RaycastHit hitInfo;
-		if (Physics.Raycast(agentPos, playerPos - agentPos, out hitInfo))
+		if (Physics.Raycast(agentPos, entityPos - agentPos, out hitInfo))
 		{
 			if (hitInfo.rigidbody == null)
 			{
 				// wall collision!
 				return false;
 			}
-			else if (hitInfo.collider.gameObject == Registry.Instance.player.gameObject)
+			else if (hitInfo.collider.gameObject == entity.gameObject)
 			{
 				return true;
 			}
