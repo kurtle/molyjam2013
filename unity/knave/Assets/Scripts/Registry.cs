@@ -49,7 +49,10 @@ public class Registry : MonoBehaviour
 
 	public void endGame()
 	{
-		this.showWinScreenTime = Game.gameTime() + 2000;
+		if (this.showWinScreenTime == int.MaxValue)
+		{
+			this.showWinScreenTime = Game.gameTime() + 2000;
+		}
 	}
 
 	private void Update()
