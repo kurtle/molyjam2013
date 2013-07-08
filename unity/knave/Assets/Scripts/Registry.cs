@@ -17,10 +17,12 @@ public class Registry : MonoBehaviour
 	public List<Police> policeList = new List<Police>();
 	
 	public Townsfolk townsfolk;
+	public Drunk drunk;
 
 	public List<Agent> citizenList = new List<Agent>();
 
 	private bool gameOver;
+
 
 	private void Awake()
 	{

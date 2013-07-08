@@ -33,6 +33,8 @@ public class Townsfolk : Agent
 	private int aghastTime;
 	private int dozeTime;
 	private int millTime;
+	
+	private Actor whoStoleFrom;
 
 	private Police policeToSeek;
 	private float baseSpeed;
@@ -83,8 +85,16 @@ public class Townsfolk : Agent
 	{
 		if (info.gameObject == Registry.Instance.player.gameObject)
 		{
+			this.whoStoleFrom = Registry.Instance.player;
 			this.stealFrom();
 		}
+		
+		if (info.gameObject == Registry.Instance.drunk.gameObject)
+		{
+			this.whoStoleFrom = Registry.Instance.drunk;
+			this.stealFrom();
+		}
+		
 	}
 
 	private void updateFleeState()
@@ -129,7 +139,7 @@ public class Townsfolk : Agent
 
 		if (Vector3.Distance(policePos, myPos) < this.informPoliceDistance)
 		{
-			this.policeToSeek.informPlayerPosition(playerLastSeen);
+			this.policeToSeek.informActorPosition(playerLastSeen,this.whoStoleFrom);
 			startMill();
 
 			return;

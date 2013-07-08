@@ -51,7 +51,7 @@ public class Player : Actor
 			{
 				if(p.seesEntity(this))
 				{
-					p.informPlayerPosition(this.transform.position);
+					p.informActorPosition(this.transform.position, this);
 				}
 			}
 		}

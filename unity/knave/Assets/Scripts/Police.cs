@@ -27,12 +27,15 @@ public class Police : Agent
 	private Collider justCollidedWith;
 	private float baseSpeed;
 	
-	private bool isPlayerMarked;
+	//private bool isPlayerMarked;
 	
 	private int updateCount;
+	
+	private Actor seekActor;
 
 	protected void Start()
 	{
+		this.seekActor = null;
 		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
 		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 6, 150, WrapMode.Loop));
 		this.spriteAnimation.play(ANIM_IDLE);
@@ -42,7 +45,6 @@ public class Police : Agent
 		
 		this.baseSpeed = speed;
 		this.setPathfindingEnabled(false);
-		this.isPlayerMarked = false;
 		this.updateCount = 0;
 		//this.destination = this.transform.position;
 	}
@@ -58,9 +60,9 @@ public class Police : Agent
 
 		base.FixedUpdate();
 		
-		if (seesEntity(Registry.Instance.player))
+		if (seekActor != null && seesEntity(seekActor))
 		{
-			playerLastSeen = Registry.Instance.player.transform.position;
+			playerLastSeen = seekActor.transform.position;
 		}
 		
 		if (this.behaviorState == POL_BEHAVIOR_PATROL)
@@ -95,9 +97,9 @@ public class Police : Agent
 	{
 		emote(EMOTE_NONE);
 
-		if (seesEntity(Registry.Instance.player) && this.isPlayerMarked)
+		if (seekActor != null && seesEntity(seekActor))
 		{
-			informPlayerPosition(playerLastSeen);
+			informActorPosition(playerLastSeen,seekActor);
 			//changeState(POL_BEHAVIOR_CHASING);
 		} else
 		{
@@ -146,10 +148,10 @@ public class Police : Agent
 	{
 		emote(EMOTE_ALERT);
 
-		if (seesEntity(Registry.Instance.player))
+		if (seekActor != null && seesEntity(seekActor))
 		{
 			//changeState(POL_BEHAVIOR_CHASING);
-			informPlayerPosition(this.playerLastSeen);
+			informActorPosition(this.playerLastSeen, seekActor);
 		}
 		else if (Game.gameTime() > this.lastBehaviorChangeTime + 3000)
 		{
@@ -173,8 +175,8 @@ public class Police : Agent
 			//caught player
 			changeState(POL_BEHAVIOR_EMBARRASSED);
 			this.setPathfindingEnabled(false);
-			this.isPlayerMarked = false;
-		} else if (seesEntity(Registry.Instance.player))
+			seekActor = null;
+		} else if (seekActor != null && seesEntity(seekActor))
 		{
 			//changeState(POL_BEHAVIOR_CHASING);
 			//this.setPathfindingEnabled(false);
@@ -198,9 +200,10 @@ public class Police : Agent
 		}
 	}
 
-	public void informPlayerPosition(Vector3 lastPos)
+	public void informActorPosition(Vector3 lastPos, Actor toSeek)
+
 	{
-		this.isPlayerMarked = true;
+		this.seekActor = toSeek;
 		changeState(POL_BEHAVIOR_DESTINATION);
 		this.setPathfindingEnabled(true);
 		this.setDestination(lastPos);
