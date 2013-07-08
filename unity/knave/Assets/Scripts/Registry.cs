@@ -17,7 +17,8 @@ public class Registry : MonoBehaviour
 	public List<Police> policeList = new List<Police>();
 	
 	public Townsfolk townsfolk;
-
+	public Drunk drunk;
+	
 	private void Awake()
 	{
 		_instance = this;

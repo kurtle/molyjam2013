@@ -216,6 +216,10 @@ MonoBehaviour:
     numFrames: 1
     frameTime: 11111
     mode: 2
+  - startFrame: 2
+    numFrames: 1
+    frameTime: 111111
+    mode: 2
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
