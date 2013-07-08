@@ -17,6 +17,9 @@ public class King : Agent
 
 	public Rect dawdleBounds;
 
+	public float endGameDistance = 7f;
+	public int requiredAngryCitizens = 4;
+
 	private int changeStateAt;
 	
 	private void Start()
@@ -29,6 +32,28 @@ public class King : Agent
 
 		this.changeState(KNG_BEHAVIOR_LOITER);
 		this.changeStateAt = Game.gameTime() + Random.Range(loiterMinTime, loiterMaxTime);
+	}
+
+	private void OnCollisionEnter(Collision info)
+	{
+		if (info.gameObject == Registry.Instance.player.gameObject)
+		{
+			Vector3 myPos = this.transform.position;
+
+			int angryCount = 0;
+			foreach (Agent citizen in Registry.Instance.citizenList)
+			{
+				if (citizen.isAngry() && Vector3.Distance(myPos, citizen.transform.position) < this.endGameDistance)
+				{
+					++angryCount;
+				}
+			}
+
+			if (angryCount >= this.requiredAngryCitizens)
+			{
+				Registry.Instance.endGame();
+			}
+		}
 	}
 
 	protected override void FixedUpdate()
