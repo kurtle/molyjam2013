@@ -3,16 +3,18 @@ using System.Collections;
 
 public class Drunk : Agent
 {	
-	public const bool USE_DRUNK = false;
+	public const bool USE_DRUNK = true;
 	public const string DRUNK_BEHAVIOR_MILL = "MILL";
 	public const string DRUNK_BEHAVIOR_DOZE = "DOZE";
 	public const string DRUNK_BEHAVIOR_SEEKTOWNSF = "SEEKTOWNSF";
+	public const string DRUNK_BEHAVIOR_SEEKBEER = "SEEKBEER";
 	
 	private const string ANIM_IDLE = "idle";
 	private const string ANIM_WALK = "walk";
 
 	private const uint EMOTE_NONE = 999;
 	private const uint EMOTE_MARKED = 0;
+	private const uint EMOTE_BEER = 5;
 	
 	public int minMillTime, maxMillTime;
 	public int minDozeTime, maxDozeTime;
@@ -40,7 +42,7 @@ public class Drunk : Agent
 		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 5, 150, WrapMode.Loop));
 		this.spriteAnimation.play(ANIM_IDLE);
 
-		startSeekTownsf(Registry.Instance.townsfolk);
+		startSeekBeer();
 	}
 	
 	
@@ -64,24 +66,56 @@ public class Drunk : Agent
 		{
 			updateSeekTownsfState();
 		}
+		else if (this.behaviorState == DRUNK_BEHAVIOR_SEEKBEER)
+		{
+			updateSeekBeerState();
+		}
 
 		base.FixedUpdate();
+	}
+	
+	public bool hasBeer()
+	{
+		return this.behaviorState == DRUNK_BEHAVIOR_SEEKTOWNSF;
 	}
 	
 	private void updateSeekTownsfState()
 	{
 		Vector3 townsfPos = this.townsfToSeek.transform.position;
 
-		emote(EMOTE_MARKED);
+		emote(EMOTE_BEER);
 		
-		if (this.justCollided && this.justCollidedWith == Registry.Instance.drunk.collider)
+		//if (this.justCollided && this.justCollidedWith == Registry.Instance.drunk.collider)
+		//{
+		//	this.startMill();
+		//} 
+		//else 
+		if (this.justCollided)
 		{
-			this.startMill();
-		} else if (this.isDestinationReached())
+			foreach(Police p in Registry.Instance.policeList)
+			{
+				if (this.justCollidedWith == p.collider)
+				{
+					this.startSeekBeer();
+					return;
+				}
+			}
+		}	
+		
+		if (this.isDestinationReached())
 		{
 			this.setDestination(townsfPos);
 		} 
 
+	}
+
+	private void updateSeekBeerState()
+	{
+		emote(EMOTE_MARKED);
+		if (this.isDestinationReached())
+		{
+			this.startSeekTownsf(Registry.Instance.townsfolk);
+		}
 	}
 	
 	private void updateMillState()
@@ -133,6 +167,7 @@ public class Drunk : Agent
 		switch (emoteIndex)
 		{
 			case EMOTE_MARKED:
+			case EMOTE_BEER:
 				this.emotePopup.gameObject.SetActive(true);
 				this.emotePopup.playClip(emoteIndex);
 				break;
@@ -151,6 +186,14 @@ public class Drunk : Agent
 
 		this.townsfToSeek = tf;
 		this.setDestination(tf.transform.position);
+	}
+
+	private void startSeekBeer()
+	{
+		this.changeState(DRUNK_BEHAVIOR_SEEKBEER);
+		this.setPathfindingEnabled(true);
+		this.spriteAnimation.play(ANIM_WALK, true);
+		this.setDestination(new Vector3(0f,0f,-13.8f));
 	}
 
 }

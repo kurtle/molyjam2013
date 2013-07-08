@@ -91,7 +91,7 @@ public class Townsfolk : Agent
 		
 		if (Drunk.USE_DRUNK)
 		{
-			if (info.gameObject == Registry.Instance.drunk.gameObject)
+			if (info.gameObject == Registry.Instance.drunk.gameObject && Registry.Instance.drunk.hasBeer())
 			{
 				this.whoStoleFrom = Registry.Instance.drunk;
 				this.stealFrom();

@@ -176,7 +176,14 @@ public class Police : Agent
 			changeState(POL_BEHAVIOR_EMBARRASSED);
 			this.setPathfindingEnabled(false);
 			seekActor = null;
-		} else if (seekActor != null && seesEntity(seekActor))
+		} else if (this.justCollided && this.justCollidedWith == Registry.Instance.drunk.collider)
+		{
+			//caught player
+			changeState(POL_BEHAVIOR_PATROL);
+			this.setPathfindingEnabled(false);
+			seekActor = null;
+		}
+		else if (seekActor != null && seesEntity(seekActor))
 		{
 			//changeState(POL_BEHAVIOR_CHASING);
 			//this.setPathfindingEnabled(false);
