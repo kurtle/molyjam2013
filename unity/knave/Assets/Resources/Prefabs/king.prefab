@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae4770fdc480d240a34ea30b1ca7e3c, type: 3}
   m_Name: 
   totalFrames: 12.8000002
-  framePercentHeight: .600000024
+  framePercentHeight: .625
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
