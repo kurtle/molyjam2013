@@ -6,6 +6,7 @@ public class Actor : MonoBehaviour
 	public bool debugEnabled = false;
 	public SpriteAnimation spriteAnimation;
 	public bool flipFacing;
+	public AudioSource audioSource;
 	
 	public float speed;
 
@@ -50,5 +51,13 @@ public class Actor : MonoBehaviour
 		}
 
 		this.lastPosition = position;
+	}
+
+	protected void playAudioClip(AudioClip clip)
+	{
+		if (this.audioSource == null) return;
+
+		this.audioSource.clip = clip;
+		this.audioSource.Play();
 	}
 }

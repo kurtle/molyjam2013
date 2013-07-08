@@ -265,6 +265,7 @@ MonoBehaviour:
   debugEnabled: 0
   spriteAnimation: {fileID: 11400002}
   flipFacing: 0
+  audioSource: {fileID: 0}
   speed: .100000001
 --- !u!114 &11400002
 MonoBehaviour:
@@ -276,8 +277,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aae4770fdc480d240a34ea30b1ca7e3c, type: 3}
   m_Name: 
-  totalFrames: 10
-  framePercentHeight: 1
+  totalFrames: 8
+  framePercentHeight: .625
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

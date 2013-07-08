@@ -9,6 +9,13 @@ public class King : Agent
 	private const string ANIM_IDLE = "idle";
 	private const string ANIM_WALK = "walk";
 
+	private const uint EMOTE_NONE = 999;
+	private const uint EMOTE_HEART = 3;
+	private const uint EMOTE_BROKENHEART = 4;
+
+	public Popup emotePopup;
+	public AudioClip laughClip;
+
 	public int loiterMinTime = 1500;
 	public int loiterMaxTime = 7500;
 
@@ -21,6 +28,8 @@ public class King : Agent
 	public int requiredAngryCitizens = 4;
 
 	private int changeStateAt;
+
+	private int clearEmoteTime;
 	
 	private void Start()
 	{
@@ -51,8 +60,18 @@ public class King : Agent
 
 			if (angryCount >= this.requiredAngryCitizens)
 			{
+				this.emote(EMOTE_BROKENHEART);
+				this.clearEmoteTime = int.MaxValue;
+
 				Registry.Instance.endGame();
 			}
+			else
+			{
+				this.emote(EMOTE_HEART);
+				this.clearEmoteTime = Game.gameTime() + 5000;
+			}
+
+			this.playAudioClip(this.laughClip);
 		}
 	}
 
@@ -68,6 +87,11 @@ public class King : Agent
 			{
 				startLoiter();
 			}
+		}
+
+		if (Game.gameTime() > this.clearEmoteTime)
+		{
+			emote(EMOTE_NONE);
 		}
 
 		base.FixedUpdate();
@@ -90,5 +114,23 @@ public class King : Agent
 
 		changeState(KNG_BEHAVIOR_LOITER);
 		this.changeStateAt = Game.gameTime() + Random.Range(loiterMinTime, loiterMaxTime);
+	}
+
+	private void emote(uint emoteIndex)
+	{
+		if (this.emotePopup == null) return;
+
+		switch (emoteIndex)
+		{
+			case EMOTE_HEART:
+			case EMOTE_BROKENHEART:
+				this.emotePopup.gameObject.SetActive(true);
+				this.emotePopup.playClip(emoteIndex);
+				break;
+
+			default:
+				this.emotePopup.gameObject.SetActive(false);
+				break;
+		}
 	}
 }

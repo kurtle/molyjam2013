@@ -238,6 +238,7 @@ MonoBehaviour:
   debugEnabled: 0
   spriteAnimation: {fileID: 11400002}
   flipFacing: 0
+  audioSource: {fileID: 0}
   speed: .0250000004
   navMeshAgent: {fileID: 19500000}
   emotePopup: {fileID: 11400004}
@@ -265,8 +266,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aae4770fdc480d240a34ea30b1ca7e3c, type: 3}
   m_Name: 
-  totalFrames: 12.8000002
-  framePercentHeight: .600000024
+  totalFrames: 8
+  framePercentHeight: .625
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
