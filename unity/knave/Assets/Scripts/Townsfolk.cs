@@ -89,10 +89,13 @@ public class Townsfolk : Agent
 			this.stealFrom();
 		}
 		
-		if (info.gameObject == Registry.Instance.drunk.gameObject)
+		if (Drunk.USE_DRUNK)
 		{
-			this.whoStoleFrom = Registry.Instance.drunk;
-			this.stealFrom();
+			if (info.gameObject == Registry.Instance.drunk.gameObject)
+			{
+				this.whoStoleFrom = Registry.Instance.drunk;
+				this.stealFrom();
+			}
 		}
 		
 	}
