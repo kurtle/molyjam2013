@@ -10,6 +10,7 @@ unity/knave/Assembly-CSharp.csproj
 unity/knave/Assembly-CSharp-vs.csproj
 unity/knave/Assembly-CSharp.pidb
 unity/knave/knave.userprefs
+Build/
 
 # Other files and folders
 .settings/
