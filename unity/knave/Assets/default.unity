@@ -396,6 +396,55 @@ Prefab:
   m_RootGameObject: {fileID: 389035052}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &94906668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+  m_PrefabInternal: {fileID: 1205258236}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 94906670}
+  - 114: {fileID: 94906669}
+  m_Layer: 0
+  m_Name: Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &94906669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 884a7ae6409240f438a292665b6b9bf7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1205258236}
+  m_GameObject: {fileID: 94906668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443766f0fbb40814199b2d62889809d8, type: 3}
+  m_Name: 
+  player: {fileID: 1319165155}
+  king: {fileID: 1481836026}
+  police1: {fileID: 1422236835}
+  police2: {fileID: 1667623226}
+  police3: {fileID: 1706826056}
+  policeList: []
+  townsfolk: {fileID: 2057116745}
+  drunk: {fileID: 2116971969}
+  citizenList: []
+  winScreen: {fileID: 635632840}
+--- !u!4 &94906670
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+  m_PrefabInternal: {fileID: 1205258236}
+  m_GameObject: {fileID: 94906668}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 635632841}
+  m_Father: {fileID: 0}
 --- !u!1001 &100376472
 Prefab:
   m_ObjectHideFlags: 0
@@ -4136,52 +4185,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &518529903
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 518529904}
-  - 114: {fileID: 518529905}
-  m_Layer: 0
-  m_Name: Game
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &518529904
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 518529903}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
---- !u!114 &518529905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 518529903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 443766f0fbb40814199b2d62889809d8, type: 3}
-  m_Name: 
-  player: {fileID: 1319165155}
-  king: {fileID: 1481836026}
-  police1: {fileID: 1422236835}
-  police2: {fileID: 1667623226}
-  police3: {fileID: 1706826056}
-  policeList: []
-  townsfolk: {fileID: 2057116745}
-  drunk: {fileID: 2116971969}
-  citizenList: []
 --- !u!1001 &526463288
 Prefab:
   m_ObjectHideFlags: 0
@@ -5024,6 +5027,61 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &635632839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+  m_PrefabInternal: {fileID: 1205258236}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 635632841}
+  - 33: {fileID: 635632842}
+  - 23: {fileID: 635632840}
+  m_Layer: 0
+  m_Name: winscreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &635632840
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: 884a7ae6409240f438a292665b6b9bf7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1205258236}
+  m_GameObject: {fileID: 635632839}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 245d086e4f79c0b419a9f83f23fc19fc, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!4 &635632841
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+  m_PrefabInternal: {fileID: 1205258236}
+  m_GameObject: {fileID: 635632839}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 40, y: 1, z: 30}
+  m_Children: []
+  m_Father: {fileID: 94906670}
+--- !u!33 &635632842
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: 884a7ae6409240f438a292665b6b9bf7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1205258236}
+  m_GameObject: {fileID: 635632839}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &646317644
 Prefab:
   m_ObjectHideFlags: 0
@@ -8551,6 +8609,74 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1562978450}
   m_GameObject: {fileID: 1191970933}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1205258236
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: drunk
+      value: 
+      objectReference: {fileID: 2116971969}
+    - target: {fileID: 11400000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: townsfolk
+      value: 
+      objectReference: {fileID: 2057116745}
+    - target: {fileID: 11400000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: police1
+      value: 
+      objectReference: {fileID: 1422236835}
+    - target: {fileID: 11400000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: police2
+      value: 
+      objectReference: {fileID: 1667623226}
+    - target: {fileID: 11400000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: police3
+      value: 
+      objectReference: {fileID: 1706826056}
+    - target: {fileID: 11400000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: king
+      value: 
+      objectReference: {fileID: 1481836026}
+    - target: {fileID: 11400000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1319165155}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 884a7ae6409240f438a292665b6b9bf7, type: 2}
+  m_RootGameObject: {fileID: 94906668}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1221431842
 GameObject:
   m_ObjectHideFlags: 0
@@ -8872,6 +8998,10 @@ Prefab:
     - target: {fileID: 400002, guid: 116d15eab661687478e9419fcc8d1ff2, type: 2}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 116d15eab661687478e9419fcc8d1ff2, type: 2}
+      propertyPath: requiredAngryCitizens
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 116d15eab661687478e9419fcc8d1ff2, type: 2}
@@ -10912,7 +11042,7 @@ MonoBehaviour:
     width: 30
     height: 30
   endGameDistance: 7
-  requiredAngryCitizens: 4
+  requiredAngryCitizens: 3
 --- !u!195 &1481836027
 NavMeshAgent:
   m_ObjectHideFlags: 0
