@@ -199,12 +199,19 @@ public class Police : Agent
 			changeState(POL_BEHAVIOR_PATROL);
 		}
 	}
+
 	public void informActorPosition(Vector3 lastPos, Actor toSeek)
+
 	{
 		this.seekActor = toSeek;
 		changeState(POL_BEHAVIOR_DESTINATION);
 		this.setPathfindingEnabled(true);
 		this.setDestination(lastPos);
+	}
+
+	public override bool isAngry()
+	{
+		return (this.behaviorState == POL_BEHAVIOR_DESTINATION);
 	}
 
 	private void emote(uint emoteIndex)
