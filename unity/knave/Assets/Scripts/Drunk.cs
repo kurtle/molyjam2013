@@ -102,7 +102,7 @@ public class Drunk : Agent
 			}
 		}	
 		
-		if (this.isDestinationReached())
+		if (this.isDestinationReached()  && Game.gameTime() > this.lastBehaviorChangeTime + 500)
 		{
 			this.setDestination(townsfPos);
 		} 
@@ -112,7 +112,7 @@ public class Drunk : Agent
 	private void updateSeekBeerState()
 	{
 		emote(EMOTE_MARKED);
-		if (this.isDestinationReached())
+		if (this.isDestinationReached() && Game.gameTime() > this.lastBehaviorChangeTime + 500)
 		{
 			this.startSeekTownsf(Registry.Instance.townsfolk);
 		}
@@ -193,7 +193,7 @@ public class Drunk : Agent
 		this.changeState(DRUNK_BEHAVIOR_SEEKBEER);
 		this.setPathfindingEnabled(true);
 		this.spriteAnimation.play(ANIM_WALK, true);
-		this.setDestination(new Vector3(0f,0f,-14.5f));
+		this.setDestination(new Vector3(0f,0f,-13.5f));
 	}
 
 }
