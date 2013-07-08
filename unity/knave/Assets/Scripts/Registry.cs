@@ -21,8 +21,9 @@ public class Registry : MonoBehaviour
 
 	public List<Agent> citizenList = new List<Agent>();
 
-	private bool gameOver;
+	public MeshRenderer winScreen;
 
+	private int showWinScreenTime = int.MaxValue;
 
 	private void Awake()
 	{
@@ -48,17 +49,14 @@ public class Registry : MonoBehaviour
 
 	public void endGame()
 	{
-		this.gameOver = true;
+		this.showWinScreenTime = Game.gameTime() + 2000;
 	}
 
-	private void OnGUI()
+	private void Update()
 	{
-		if (this.gameOver)
+		if (Game.gameTime() > this.showWinScreenTime)
 		{
-			if (GUI.Button(new Rect(0, 0, 300, 250), "You win! Bad girl."))
-			{
-				Application.LoadLevel(0);
-			}
+			this.winScreen.enabled = true;
 		}
 	}
 }
