@@ -193,7 +193,7 @@ public class Drunk : Agent
 		this.changeState(DRUNK_BEHAVIOR_SEEKBEER);
 		this.setPathfindingEnabled(true);
 		this.spriteAnimation.play(ANIM_WALK, true);
-		this.setDestination(new Vector3(0f,0f,-13.8f));
+		this.setDestination(new Vector3(0f,0f,-14.5f));
 	}
 
 }

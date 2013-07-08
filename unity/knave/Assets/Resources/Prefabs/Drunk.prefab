@@ -89,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.60000002, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
 --- !u!23 &2300000
@@ -122,7 +122,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 35d1b50c29e5dcc46bad76f36aa82c30, type: 2}
+  - {fileID: 2100000, guid: be7efd878d268493eb1389567415b76f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -286,6 +286,7 @@ MonoBehaviour:
   debugEnabled: 0
   spriteAnimation: {fileID: 11400006}
   flipFacing: 0
+  audioSource: {fileID: 0}
   speed: .0250000004
   navMeshAgent: {fileID: 19500000}
   minMillTime: 2500
@@ -309,8 +310,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aae4770fdc480d240a34ea30b1ca7e3c, type: 3}
   m_Name: 
-  totalFrames: 12.8000002
-  framePercentHeight: .600000024
+  totalFrames: 8
+  framePercentHeight: .625
 --- !u!195 &19500000
 NavMeshAgent:
   m_ObjectHideFlags: 1
