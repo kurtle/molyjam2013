@@ -24,7 +24,7 @@ public class King : Agent
 
 	public Rect dawdleBounds;
 
-	public float endGameDistance = 10f;
+	public float endGameDistance = 12f;
 	public int requiredAngryCitizens = 4;
 
 	private int changeStateAt;
