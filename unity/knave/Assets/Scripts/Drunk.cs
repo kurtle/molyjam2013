@@ -41,8 +41,9 @@ public class Drunk : Agent
 		this.spriteAnimation.addClip(ANIM_IDLE, new SpriteAnimation.Clip(0, 1, 150, WrapMode.Loop));
 		this.spriteAnimation.addClip(ANIM_WALK, new SpriteAnimation.Clip(1, 5, 150, WrapMode.Loop));
 		this.spriteAnimation.play(ANIM_IDLE);
-
-		startSeekBeer();
+		
+		this.startSeekBeer();
+		//this.startSeekTownsf(Registry.Instance.townsfolk);
 	}
 	
 	
@@ -83,7 +84,7 @@ public class Drunk : Agent
 	{
 		Vector3 townsfPos = this.townsfToSeek.transform.position;
 
-		//emote(EMOTE_BEER);
+		emote(EMOTE_BEER);
 		
 		//if (this.justCollided && this.justCollidedWith == Registry.Instance.drunk.collider)
 		//{
@@ -111,7 +112,7 @@ public class Drunk : Agent
 
 	private void updateSeekBeerState()
 	{
-		//emote(EMOTE_MARKED);
+		emote(EMOTE_MARKED);
 		if (this.isDestinationReached() && Game.gameTime() > this.lastBehaviorChangeTime + 500)
 		{
 			this.startSeekTownsf(Registry.Instance.townsfolk);
@@ -164,7 +165,7 @@ public class Drunk : Agent
 	
 	private void emote(uint emoteIndex)
 	{
-		/*
+		
 		switch (emoteIndex)
 		{
 			case EMOTE_MARKED:
@@ -177,7 +178,7 @@ public class Drunk : Agent
 				this.emotePopup.gameObject.SetActive(false);
 				break;
 		}
-		*/
+		
 	}
 	
 	private void startSeekTownsf(Townsfolk tf)

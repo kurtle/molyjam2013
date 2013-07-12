@@ -14,7 +14,12 @@ public class Agent : Actor
 
 	private bool pathfindingEnabled;
 	private bool isFollowingPath;
-
+	
+	private Vector3 myPreviousLocation;
+	private Vector3 previousMove;
+	private Vector3 myDest;
+	private bool triedToMove;
+	
 	protected virtual void Awake()
 	{
 		if (this.navMeshAgent == null)
@@ -22,16 +27,27 @@ public class Agent : Actor
 			Debug.LogError("NO NAVMESHAGENT assigned to " + this);
 		}
 		this.currentPath = null;
+		this.previousMove = new Vector3(0,0,0);
+		this.myPreviousLocation = this.transform.localPosition;
+		this.myDest = new Vector3(0,0,0);
+		this.triedToMove = false;
 	}
 
 	protected override void FixedUpdate()
 	{
-		if (this.pathfindingEnabled)
+		//If the last move failed, there may have been some collission, and we got off path
+		if(this.triedToMove && this.transform.localPosition.Equals(this.myPreviousLocation))
 		{
+			setDestination(myDest);
+			this.triedToMove = false;
+		}
+		else if (this.pathfindingEnabled)
+		{
+			this.triedToMove = false;	
 			if (this.currentPath == null)
 			{
 				if (this.navMeshAgent.hasPath)
-				{
+				{	
 					this.currentPath = this.navMeshAgent.path;
 					this.currentCornerIndex = 0;
 				}
@@ -42,7 +58,8 @@ public class Agent : Actor
 				{
 					Debug.DrawLine(this.transform.localPosition, this.currentPath.corners[this.currentCornerIndex], Color.red);
 				}
-
+				
+				
 				if (Vector3.Distance(this.transform.localPosition, this.currentPath.corners[this.currentCornerIndex]) < 0.25f)
 				{
 					if (this.currentCornerIndex < this.currentPath.corners.Length - 1)
@@ -66,8 +83,13 @@ public class Agent : Actor
 					{
 						Debug.Log("" + this.transform.localPosition + " " + this.currentPath.corners[this.currentCornerIndex] + " " + dir);
 					}
-
+					
+					this.previousMove = dir;
+					this.myPreviousLocation = this.transform.localPosition;
+					this.triedToMove = true;
+					
 					this.moveDelta(dir);
+					
 				}
 			}
 		}
@@ -86,6 +108,7 @@ public class Agent : Actor
 
 		this.navMeshAgent.ResetPath();
 		this.navMeshAgent.SetDestination(dest);
+		this.myDest = dest;
 
 		this.isFollowingPath = true;
 	}
