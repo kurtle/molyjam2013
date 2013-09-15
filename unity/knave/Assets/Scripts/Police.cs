@@ -65,6 +65,8 @@ public class Police : Agent
 			playerLastSeen = seekActor.transform.position;
 		}
 		
+		Debug.Log("updating police");
+		
 		if (this.behaviorState == POL_BEHAVIOR_PATROL)
 		{
 			updatePatrolState();
@@ -96,7 +98,9 @@ public class Police : Agent
 	private void updatePatrolState()
 	{
 		emote(EMOTE_NONE);
+		
 
+		
 		if (seekActor != null && seesEntity(seekActor))
 		{
 			informActorPosition(playerLastSeen,seekActor);
@@ -147,6 +151,8 @@ public class Police : Agent
 	private void updateAlertState()
 	{
 		emote(EMOTE_ALERT);
+		
+		Debug.Log("Alert!");
 
 		if (seekActor != null && seesEntity(seekActor))
 		{
@@ -157,6 +163,7 @@ public class Police : Agent
 		{
 			this.speed = baseSpeed;
 			changeState(POL_BEHAVIOR_PATROL);
+			Debug.Log("Back to patrolling.");
 		}
 		else
 		{

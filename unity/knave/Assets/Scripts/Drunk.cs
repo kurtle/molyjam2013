@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Drunk : Agent
 {	
-	public const bool USE_DRUNK = false;
+	public const bool USE_DRUNK = true;
 	public const string DRUNK_BEHAVIOR_MILL = "MILL";
 	public const string DRUNK_BEHAVIOR_DOZE = "DOZE";
 	public const string DRUNK_BEHAVIOR_SEEKTOWNSF = "SEEKTOWNSF";

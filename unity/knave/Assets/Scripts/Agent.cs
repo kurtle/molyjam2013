@@ -81,7 +81,7 @@ public class Agent : Actor
 
 					if (this.debugEnabled)
 					{
-						Debug.Log("" + this.transform.localPosition + " " + this.currentPath.corners[this.currentCornerIndex] + " " + dir);
+						//Debug.Log("" + this.transform.localPosition + " " + this.currentPath.corners[this.currentCornerIndex] + " " + dir);
 					}
 					
 					this.previousMove = dir;

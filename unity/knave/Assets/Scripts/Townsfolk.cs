@@ -168,6 +168,47 @@ public class Townsfolk : Agent
 			return;
 		}
 
+		//seekRandomVisiblePolice();
+		seekClosestVisiblePolice();
+		
+		
+		if (Game.gameTime() > this.aghastTime)
+		{
+			startMill();
+
+			return;
+		}		
+	}
+	
+	private bool seekClosestVisiblePolice()
+	{
+		Police closestPolice = null;
+		float smallestDistance = float.MaxValue;
+		foreach (Police p in Registry.Instance.policeList)
+		{
+			if (this.seesEntity(p))
+			{
+				float newDistance = Vector3.Distance(this.transform.position, p.transform.position); 
+				if (newDistance < smallestDistance)
+				{
+					smallestDistance = newDistance;
+					closestPolice = p;
+				}
+			}	
+		}
+		
+		if (closestPolice != null)
+		{
+			startSeekPolice(closestPolice);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	//Returns true if a police is visible (and is now being sought), and false otherwise
+	private bool seekRandomVisiblePolice()
+	{
 		List<Police> visibleList = new List<Police>();
 		foreach (Police p in Registry.Instance.policeList)
 		{
@@ -180,15 +221,10 @@ public class Townsfolk : Agent
 		{
 			int index = Random.Range(0, visibleList.Count);
 			startSeekPolice(visibleList[index]);
-			return;
+			return true;
 		}
 		
-		if (Game.gameTime() > this.aghastTime)
-		{
-			startMill();
-
-			return;
-		}		
+		return false;
 	}
 
 	private void updateMillState()
