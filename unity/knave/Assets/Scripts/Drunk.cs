@@ -73,6 +73,9 @@ public class Drunk : Agent
 		}
 
 		base.FixedUpdate();
+		
+		this.justCollided = false;
+		this.justCollidedWith = null;
 	}
 	
 	public bool hasBeer()
