@@ -133,6 +133,11 @@ public class Agent : Actor
 			this.pathfindingEnabled = value;
 		}
 	}
+	
+	protected bool isPathfindingEnabled()
+	{
+		return this.pathfindingEnabled;
+	}
 
 	public bool seesEntity(Actor entity)
 	{

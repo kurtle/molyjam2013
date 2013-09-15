@@ -37,7 +37,7 @@ public class Game
 
 	public static Direction randomDirection()
 	{
-		return (Game.Direction)Random.Range((int)Direction.UP, (int)Direction.LEFT);
+		return (Game.Direction)Random.Range(0,4);
 	}
 
 	public static Vector3 directionVector(Direction dir)

@@ -22,6 +22,7 @@ public class Police : Agent
 	private Vector3 playerLastSeen;
 
 	private Game.Direction patrolDirection;
+	private Game.Direction alertDirection;
 
 	private bool justCollided;
 	private Collider justCollidedWith;
@@ -151,24 +152,25 @@ public class Police : Agent
 	private void updateAlertState()
 	{
 		emote(EMOTE_ALERT);
-		
-		Debug.Log("Alert!");
 
 		if (seekActor != null && seesEntity(seekActor))
 		{
 			//changeState(POL_BEHAVIOR_CHASING);
 			informActorPosition(this.playerLastSeen, seekActor);
 		}
-		else if (Game.gameTime() > this.lastBehaviorChangeTime + 3000)
-		{
-			this.speed = baseSpeed;
-			changeState(POL_BEHAVIOR_PATROL);
-			Debug.Log("Back to patrolling.");
-		}
+//		else if (Game.gameTime() > this.lastBehaviorChangeTime + 3000)
+//		{
+//			this.speed = baseSpeed;
+//			changeState(POL_BEHAVIOR_PATROL);
+//			Debug.Log("Back to patrolling.");
+//		}
 		else
 		{
-			this.moveDelta(Game.directionVector(Game.randomDirection()));
-
+			if (this.justCollided)
+			{
+				this.alertDirection = Game.reverseDirection(this.alertDirection);
+			}
+			this.moveDelta(Game.directionVector(this.alertDirection));
 			this.spriteAnimation.play(ANIM_WALK, true);
 		}
 	}
@@ -200,10 +202,17 @@ public class Police : Agent
 			}
 		} else if (this.isDestinationReached())
 		{
-			changeState(POL_BEHAVIOR_PATROL);
 			this.setPathfindingEnabled(false);
+			this.goOnAlert();
 		}
 	}
+	
+	private void goOnAlert()
+	{
+		this.alertDirection = Game.randomDirection();
+		changeState(POL_BEHAVIOR_ALERT);
+	}
+		
 	
 	private void updateEmbarrassedState()
 	{
